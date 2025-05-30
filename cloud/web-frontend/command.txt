@@ -1,0 +1,2 @@
+docker build -t cloud-web-frontend .
+docker run -d --name cloud-web-frontend -p 8088:80 cloud-web-frontend

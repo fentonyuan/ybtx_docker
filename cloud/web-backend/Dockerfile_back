@@ -1,0 +1,185 @@
+FROM ubuntu:22.04
+
+# 安装ca-certificates用于HTTPS连接
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /home
+COPY gin_server /home/gin_server
+
+# 创建必要的目录
+RUN mkdir -p logs regist/certs/certs regist/certs/keys
+
+# 设置环境变量
+# ===== 基本配置 =====
+ENV SERVER_HOST=0.0.0.0                 # 服务器绑定地址，0.0.0.0表示监听所有网络接口
+ENV SERVER_PORT=8123                    # 服务器监听端口
+ENV DEBUG_LEVEL=false                   # 调试级别，true-输出详细日志，false-仅输出基本日志
+ENV DEBUG=false                         # 是否开启调试模式，控制数据库日志输出等详细信息
+ENV TEST_MODE=false                     # 是否为测试模式，测试模式下使用本地test目录中的测试数据
+
+# ===== 跨域资源配置 =====
+ENV CORS_ENABLED=true                   # 是否启用CORS
+ENV CORS_ALLOW_ORIGINS=*                # 允许的源站列表，*表示允许所有源站
+ENV CORS_ALLOW_METHODS=GET,POST,PUT,DELETE,OPTIONS  # 允许的HTTP方法列表
+ENV CORS_ALLOW_HEADERS=Content-Type,Authorization   # 允许的HTTP头列表
+ENV CORS_EXPOSE_HEADERS=Content-Length,Content-Type # 允许客户端访问的响应头列表
+ENV CORS_ALLOW_CREDENTIALS=true         # 是否允许携带凭证
+ENV CORS_MAX_AGE=86400                  # 预检请求缓存时间（秒）
+
+# ===== 数据库配置 =====
+ENV DB_USER=root                    # 主数据库用户名
+ENV DB_PASSWORD=123456            # 主数据库密码
+ENV DB_HOST=192.168.0.2                   # 主数据库主机地址
+ENV DB_PORT=3306                        # 主数据库端口
+ENV DB_NAME=gin_server                  # 主数据库名称
+
+# Radius数据库配置
+ENV RADIUS_DB_USER=radius             # Radius数据库用户名（默认同主数据库）
+ENV RADIUS_DB_PASSWORD=123456     # Radius数据库密码（默认同主数据库）
+ENV RADIUS_DB_HOST=192.168.0.2            # Radius数据库主机地址（默认同主数据库）
+ENV RADIUS_DB_PORT=3306                 # Radius数据库端口（默认同主数据库）
+ENV RADIUS_DB_NAME=radius               # Radius数据库名称
+
+# 多Radius数据库配置（可选）
+ENV RADIUS_DBS=local                    # 多Radius数据库配置的名称列表，逗号分隔
+
+# 数据库模块配置
+ENV DB_MODULE_ENABLED=true              # 是否启用高级数据库功能
+ENV DB_ENABLE_AUTO_MIGRATE=true         # 是否启用自动迁移，系统启动时自动更新数据库结构
+ENV DB_ENABLE_QUERY_CACHE=false         # 是否启用查询缓存
+ENV DB_QUERY_CACHE_TIMEOUT=60           # 查询缓存超时时间（秒）
+ENV DB_MAX_CONNECTIONS=100              # 最大数据库连接数
+ENV DB_IDLE_CONNECTIONS=10              # 连接池空闲连接数
+ENV DB_CONNECTION_LIFETIME=3600         # 连接最大生命周期（秒）
+
+# ===== 认证相关配置 =====
+ENV AUTH_INTERVAL=10                    # 设备认证间隔时间（分钟），超过此时间未认证则认为设备离线
+ENV DEVICE_STATUS_CHECK_INTERVAL=5      # 设备状态检查轮询间隔（秒）
+
+ENV AUTH_MODULE_ENABLED=true            # 是否启用认证模块
+ENV AUTH_ENABLE_USER_AUTH=true          # 是否启用用户认证功能
+ENV AUTH_ENABLE_DEVICE_AUTH=true        # 是否启用设备认证功能
+ENV AUTH_ENABLE_RADIUS_AUTH=true        # 是否启用Radius认证功能
+ENV AUTH_CACHE_TIMEOUT=300              # 认证缓存超时时间（秒）
+ENV AUTH_MAX_LOGIN_ATTEMPTS=5           # 最大登录尝试次数，超过此次数将被锁定账户
+ENV AUTH_LOCKOUT_DURATION=30            # 账户锁定时长（分钟）
+
+# ===== 远程存储配置 =====
+ENV STORAGE_TYPE=gitee                  # 存储类型，可选值：gitee、gitlab、ftp
+
+# Gitee配置
+ENV GITEE_ACCESS_TOKEN=684ed853186d45b825b415b00f16bf27  # Gitee访问令牌
+ENV GITEE_OWNER=xxxLogTest              # 仓库所有者，Gitee仓库所有者的用户名或组织名
+ENV GITEE_REPO=logtest                  # 仓库名称
+ENV GITEE_BRANCH=master                 # 分支名称，默认为master
+
+# Gitlab配置
+ENV GITLAB_HOST=http://192.168.152.134  # Gitlab服务器地址
+ENV GITLAB_ACCESS_TOKEN=glpat-6XeG1ygMM3xYz1joBxeV  # Gitlab访问令牌
+ENV GITLAB_OWNER=root                   # 仓库所有者
+ENV GITLAB_REPO=LogTest                 # 仓库名称
+ENV GITLAB_BRANCH=main                  # 分支名称，默认为main
+
+# FTP配置
+ENV FTP_HOST=127.0.0.1                  # FTP服务器地址
+ENV FTP_PORT=21                         # FTP服务器端口
+ENV FTP_USERNAME=                       # FTP用户名
+ENV FTP_PASSWORD=                       # FTP密码
+
+# ===== 日志模块配置 =====
+ENV LOG_MODULE_ENABLED=true             # 是否启用系统日志
+ENV LOG_LEVEL=info                      # 日志级别，可选值：debug、info、warn、error、fatal
+ENV LOG_ENABLE_CONSOLE_OUTPUT=true      # 是否输出到控制台
+ENV LOG_ENABLE_FILE_OUTPUT=true         # 是否输出到文件
+ENV LOG_FILE_PATH=logs/server.log       # 日志文件路径
+ENV LOG_MAX_FILE_SIZE=10                # 单个日志文件最大大小（MB）
+ENV LOG_MAX_BACKUP_COUNT=5              # 最大备份文件数
+
+# 日志管理配置
+ENV LOG_ENABLED=true                    # 是否启用日志管理功能
+ENV LOG_GENERATE_INTERVAL=10            # 日志生成间隔（分钟）
+ENV LOG_ENABLE_ENCRYPTION=false         # 是否启用日志加密
+ENV LOG_ENABLE_MOCK_GENERATION=true     # 是否启用模拟全量日志生成
+ENV LOG_DIR=logs                        # 日志目录
+ENV LOG_UPLOAD_DIR=log                  # 远程上传目录
+ENV LOG_REMOTE_PATH=log                 # 远程日志路径
+ENV LOG_PACKAGE_TYPE=json               # 日志打包方式，可选值：json、tar.gz
+ENV LOG_AES_KEY_PATH=keys/configmanager/log/aes_test_key.bin  # AES密钥文件路径
+
+# ===== 证书管理模块配置 =====
+ENV CERT_MODULE_ENABLED=true            # 是否启用证书管理功能
+ENV CERT_DIR=regist/certs/certs         # 证书存储目录
+ENV KEY_DIR=regist/certs/keys           # 密钥存储目录
+
+# ===== 配置管理模块配置 =====
+# 策略管理配置
+ENV STRATEGY_POLL_INTERVAL=300          # 轮询间隔（秒）
+ENV STRATEGY_ENABLE_ENCRYPTION=true     # 是否启用策略加密
+
+# 压缩配置
+ENV COMPRESS_FORMAT=tar.gz              # 压缩格式
+ENV COMPRESS_LEVEL=6                    # 压缩级别，1-9，1最快但压缩率最低，9最慢但压缩率最高
+ENV COMPRESS_BUFFER_SIZE=32768          # 缓冲区大小（字节）
+
+# 配置文件管理配置
+ENV CONFIG_FILE_ENABLED=true            # 是否启用配置文件管理
+ENV CONFIG_FILE_POLL_INTERVAL=300       # 轮询间隔（秒）
+ENV CONFIG_FILE_DOWNLOAD_DIR=configmanager/config_exec/downloads  # 配置文件下载目录
+ENV CONFIG_FILE_REMOTE_PATH=config      # 远程配置文件路径
+ENV CONFIG_FILE_TEST_DIR=test           # 测试模式下的配置文件目录
+ENV CONFIG_FILE_ENABLE_ENCRYPTION=false # 是否启用配置文件加密
+ENV CONFIG_FILE_SAVE_DECRYPTED_FILES=true  # 是否保存解密后的文件到本地
+ENV CONFIG_FILE_DECRYPTED_DIR=configmanager/config_exec/decypted  # 解密文件保存目录
+ENV CONFIG_FILE_AES_KEY_PATH=keys/configmanager/config_exec/aes_test_key.bin  # AES密钥文件路径
+
+# 网关配置生成模块配置
+ENV CONFIG_GEN_ENABLED=true             # 是否启用网关配置生成模块
+ENV CONFIG_GEN_ENABLE_AUTO_GENERATION=true  # 是否在系统启动时自动生成网关配置
+ENV CONFIG_GEN_STORAGE_PATH=            # 配置文件存储路径，为空时使用用户目录下的gateway_config
+ENV CONFIG_GEN_ENABLE_API_TRIGGER=true  # 是否启用API接口触发配置生成
+ENV CONFIG_GEN_ENABLE_EVENT_TRIGGER=true # 是否启用系统事件触发配置生成
+ENV CONFIG_GEN_POLL_INTERVAL=30         # 轮询间隔（秒）
+ENV CONFIG_GEN_ENABLE_ENCRYPTION=false  # 是否启用配置生成文件加密
+
+# ===== 测试数据配置 =====
+ENV TEST_ENABLE_INITIAL_DATA=true       # 是否在启动时初始化测试数据
+ENV TEST_ENABLE_REALTIME_DATA=false     # 是否启用实时测试数据生成
+ENV TEST_DEVICE_COUNT=10                # 生成的设备数量
+ENV TEST_USERS_PER_DEVICE=5             # 每个设备的用户数量
+ENV TEST_BEHAVIORS_PER_USER=10          # 每个用户的行为数据量
+ENV TEST_REALTIME_INTERVAL=60           # 实时数据生成间隔（秒）
+ENV TEST_REALTIME_BEHAVIORS_PER_INTERVAL=2  # 每个间隔生成的行为数据量
+ENV TEST_REALTIME_TIME_RANGE_START=-60  # 实时数据生成的时间范围起点（秒）
+ENV TEST_REALTIME_TIME_RANGE_END=0      # 实时数据生成的时间范围终点（秒）
+
+# ===== 设备管理模块配置 =====
+ENV DEVICE_MODULE_ENABLED=true          # 是否启用设备管理模块
+ENV DEVICE_ENABLE_AUTO_REGISTER=false   # 是否启用自动注册
+ENV DEVICE_ENABLE_BATCH_REGISTER=true   # 是否启用批量注册
+ENV DEVICE_MAX_BATCH_SIZE=100           # 最大批量注册数量
+ENV DEVICE_ENABLE_STATUS=true           # 是否启用设备状态监控
+ENV DEVICE_CHECK_INTERVAL=5             # 设备状态检查间隔（秒）
+
+# ===== 用户管理模块配置 =====
+ENV USER_MODULE_ENABLED=true            # 是否启用用户管理模块
+ENV USER_ENABLE_AUTO_REGISTER=false     # 是否启用自动注册
+ENV USER_ENABLE_BATCH_REGISTER=true     # 是否启用批量注册
+ENV USER_MAX_BATCH_SIZE=100             # 最大批量注册数量
+ENV USER_ENABLE_CONNECTIONS=true        # 是否启用用户连接关系
+ENV USER_MAX_CONNECTIONS_PER_USER=50    # 每用户最大连接数
+
+# ===== 调试日志配置 =====
+ENV DEBUG_LEVEL_DATABASE=3               # 数据库模块调试级别
+ENV DEBUG_LEVEL_AUTH=3                   # 认证模块调试级别
+ENV DEBUG_LEVEL_CERT=3                   # 证书模块调试级别
+ENV DEBUG_LEVEL_CONFIG_EXEC=3            # 配置执行模块调试级别
+ENV DEBUG_LEVEL_CONFIG_GEN=3             # 配置生成模块调试级别
+ENV DEBUG_LEVEL_LOG=3                    # 日志模块调试级别
+ENV DEBUG_LEVEL_DEVICE=3                 # 设备模块调试级别
+ENV DEBUG_LEVEL_USER=3                   # 用户模块调试级别
+
+# 暴露端口
+EXPOSE 8123
+
+# 运行应用
+CMD ["./gin-server"] 

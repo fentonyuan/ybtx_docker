@@ -1,0 +1,59 @@
+version: '3.7'
+services:
+    database:
+        image: cloud-database:latest
+        container_name: cloud-database
+        ports:
+          - "3306:3306"
+        networks:
+            cloud-net:
+                ipv4_address: 192.168.0.2
+    radius-server:
+        image: cloud-auth-server:latest
+        container_name: cloud-auth-server
+        depends_on:
+          - "database"
+        ports:
+          - "1812:1812/udp"
+          - "1813:1813/udp"
+        networks:
+            cloud-net:
+                ipv4_address: 192.168.0.3
+    cloud-web-frontend:
+        image: cloud-web-frontend:latest
+        container_name: cloud-web-frontend
+        ports:
+          - "8088:80"
+        networks:
+            cloud-net:
+                ipv4_address: 192.168.0.4
+    cloud-web-backend:
+        image: cloud-web-backend:latest
+        container_name: cloud-web-backend
+        depends_on:
+          - "database"
+        volumes:
+          - "/d/command:------------"
+        networks:
+            cloud-net:
+                ipv4_address:192.168.0.5
+    cloud-monitor:
+        image: cloud-monitor:latest
+        container_name: cloud-monitor
+        depends_on:
+          - "database"
+        ports:
+          - "1001:8080"
+        volumes:
+          - "/d/command:/app/command"
+        networks:
+            cloud-net:
+                ipv4_address:192.168.0.6
+networks:
+    cloud-net:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 192.168.0.0/24
+                  gateway: 192.168.0.1 
+        

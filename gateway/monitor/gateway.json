@@ -1,0 +1,17 @@
+{
+    "launchMode": "gateMode",
+    "innerReceivePort": 8082,
+
+    "recordDatabaseUser": "root",
+    "recordDatabasePassword": "123456",
+    "recordDatabaseHost": "127.0.0.1",
+    "recordDatabasePort": 3306,
+    "recordDatabaseName": "mail",
+
+    "upstreamDeviceHost": "127.0.0.1",
+    "upstreamDevicePort": 8081,
+    "deviceId": "10001",
+
+    "isOutputLogAsFile": true,
+    "logFilePath": "./log/log.file"
+}

@@ -1,0 +1,20 @@
+{
+    "launchMode": "edgeMode",
+    "innerReceivePort": 8081,
+    
+    "gatewayIp": "127.0.0.1",
+    "gatewayPort": 8082,
+
+    "recordDatabaseUser": "root",
+    "recordDatabasePassword": "123456",
+    "recordDatabaseHost": "127.0.0.1",
+    "recordDatabasePort": 3306,
+    "recordDatabaseName": "edge-monitor",
+
+    "upstreamDeviceHost": "127.0.0.1",
+    "upstreamDevicePort": 8080,
+    "deviceId": "20001",
+
+    "isOutputLogAsFile": true,
+    "logFilePath": "./log.file"
+}

@@ -1,0 +1,2 @@
+docker build -t cloud-database .
+docker run -d -p 3306:3306 --name cloud-database --net localNet --ip 192.168.0.2 cloud-database

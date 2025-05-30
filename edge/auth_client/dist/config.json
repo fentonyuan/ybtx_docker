@@ -1,0 +1,11 @@
+{
+  "radius": {
+    "server": "192.168.0.3",
+    "secret": "testing123",
+    "ca_cert": "./ca.pem",
+    "client_cert": "",
+    "client_key": "",
+    "nas-ip-address": "192.168.0.4",
+    "dictionary_path": "./radius_dictionary"
+  }
+}

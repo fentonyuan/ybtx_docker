@@ -1,0 +1,2 @@
+docker build -t edge-auth-server .
+docker run -d -p 1812:1812 -p 1813:1813 --name cloud-auth-server --net localNet --ip 192.168.0.3 cloud-auth-server

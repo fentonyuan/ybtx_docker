@@ -1,0 +1,2 @@
+docker build -t edge-monitor .
+docker run -d --name cloud-monitor  -p 3345:8081 -v /d/log/edge:/app/log edge-monitor

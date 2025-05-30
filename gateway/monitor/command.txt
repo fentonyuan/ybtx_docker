@@ -1,0 +1,2 @@
+docker build -t gateway-monitor .
+docker run -d --name gateway-monitor  -p 3346:8082 -v /d/log/gateway:/app/log gateway-monitor

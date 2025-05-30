@@ -1,0 +1,2 @@
+docker build -t cloud-monitor .
+docker run -d --name cloud-monitor  -p 3344:8080 -v /d/log/cloud:/app/log -v /d/command:/app/command cloud-monitor

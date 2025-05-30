@@ -1,0 +1,18 @@
+{
+    "launchMode": "cloudMode",
+    "innerReceivePort": 8080,
+
+    "edgeIp": "127.0.0.1",
+    "edgePort": 8081,
+
+    "recordDatabaseUser": "root",
+    "recordDatabasePassword": "123456",
+    "recordDatabaseHost": "127.0.0.1",
+    "recordDatabasePort": 3306,
+    "recordDatabaseName": "monitor",
+
+    "commandFolderPath": "./command",
+
+    "isOutputLogAsFile": true,
+    "logFilePath": "./log.file"
+}

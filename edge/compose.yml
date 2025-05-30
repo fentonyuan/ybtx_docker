@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+    database:
+        image: edge-database:latest
+        container_name: edge-database
+        ports:
+          - "3307:3306"
+        networks:
+            edge-net:
+                ipv4_address: 192.168.2.2
+    radius-edge:
+        image: edge-auth-server:latest
+        container_name: edge-auth-server
+        depends_on:
+          - "database"
+        ports:
+          - "1814:1812/udp"
+          - "1815:1813/udp"
+        networks:
+            edge-net:
+                ipv4_address: 192.168.2.3
+    edge-monitor:
+        image: edge-monitor:latest
+        container_name: edge-monitor
+        depends_on:
+          - "database"
+        ports:
+          - "1002:8081"
+        networks:
+            edge-net:
+                ipv4_address:192.168.2.6
+networks:
+    edge-net:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 192.168.2.0/24
+                  gateway: 192.168.2.1 
+        
