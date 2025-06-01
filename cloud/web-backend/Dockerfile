@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-COPY ./gin-server /home/gin_server
+COPY ./gin-server /home/gin-server
 COPY ./config/sources.list /home/sources.list
 
 #RUN mv /home/sources.list /etc/apt/sources.list && \
@@ -181,7 +181,7 @@ ENV DEBUG_LEVEL_CONFIG_EXEC=3
 ENV DEBUG_LEVEL_CONFIG_GEN=3             
 ENV DEBUG_LEVEL_LOG=3                    
 ENV DEBUG_LEVEL_DEVICE=3                 
-ENV DEBUG_LEVEL_USER=3                   
+ENV DEBUG_LEVEL_USER=3
 
 # 暴露端口
 EXPOSE 8123

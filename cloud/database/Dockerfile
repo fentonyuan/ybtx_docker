@@ -1,4 +1,4 @@
-FROM mysql:8.0.41
+FROM mysql:8.0.39-debian
 
 # 设置 root 用户密码（MySQL 默认要求）
 ENV MYSQL_ROOT_PASSWORD=123456
