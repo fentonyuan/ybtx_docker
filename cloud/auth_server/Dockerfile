@@ -5,11 +5,12 @@ ENV TZ=Etc/UTC
 
 COPY config/ /home/
 
-RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g; s|http://security.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g' /etc/apt/sources.list \
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g; \
+             s|http://security.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g' /etc/apt/sources.list \
     && apt-get clean \
     && apt-get update \
     && apt-get install -y openssl libssl-dev freeradius freeradius-mysql python3 python3-pip nano \
-    && pip3 install cryptography
+    && pip3 install cryptography -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
     && mv /home/sql /etc/freeradius/3.0/mods-available/sql \
