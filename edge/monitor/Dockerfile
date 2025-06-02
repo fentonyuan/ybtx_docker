@@ -4,7 +4,7 @@ FROM openjdk:11-jre-slim
 # 创建工作目录
 WORKDIR /app
 
-#创建日志目录 /app/log 
+#创建日志目录 /app/log
 RUN mkdir /app/log \
 && mkdir /app/auth
 
