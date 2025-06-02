@@ -8,7 +8,7 @@ COPY config/ /home/
 RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g; s|http://security.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g' /etc/apt/sources.list \
     && apt-get clean \
     && apt-get update \
-    && apt-get install -y openssl libssl-dev freeradius freeradius-mysql python3 python3-pip nano redis redis-server cron\
+    && apt-get install -y openssl libssl-dev freeradius freeradius-mysql python3 python3-pip nano redis redis-server cron dos2unix\
     && pip3 install cryptography -i https://mirrors.aliyun.com/pypi/simple/
 
 RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
@@ -35,11 +35,18 @@ RUN chown freerad:freerad /etc/freeradius/3.0/certs/dh \
     && ln -s /etc/freeradius/3.0/sites-available/coa /etc/freeradius/3.0/sites-enabled/ \
     && service redis-server start \
     && chmod 777 /home/output/police.json \
-    && chmod +x /etc/freeradius/3.0/code/check_inactive.sh
+    && chmod +x /etc/freeradius/3.0/code/check_inactive.sh \
+    && dos2unix /etc/freeradius/3.0/code/token.sh \
+    && chown freerad:freerad /home/output/token.txt \
+    && chmod 644 /home/output/token.txt \
+    && chmod +x /etc/freeradius/3.0/code/token.sh \
+    && dos2unix /etc/freeradius/3.0/code/token.sh \
+    && && dos2unix /etc/freeradius/3.0/code/check_inactive.sh
+
 
 RUN echo "* * * * * /bin/bash /etc/freeradius/3.0/code/check_inactive.sh >> /var/log/radacct_cron.log 2>&1" > /etc/cron.d/radius-cron \
     && chmod 0644 /etc/cron.d/radius-cron \
-    && crontab /etc/cron.d/radius-cron
+    && crontab /etc/cron.d/radius-cron \
 
 EXPOSE 1812 1813
 
