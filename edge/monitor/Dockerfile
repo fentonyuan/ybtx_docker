@@ -13,5 +13,7 @@ COPY ybtx_monitor.jar /app/app.jar
 COPY edge.json /app/config.json
 COPY auth/ /app/auth
 
+RUN chmod 777 ./auth/certification
+
 # 容器启动时运行 jar 包
 CMD ["java", "-jar", "/app/app.jar"]
