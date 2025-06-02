@@ -1,3 +1,8 @@
 docker build -t cloud-web-backend .
-docker run -d -p 8123:8123 --name cloud-web-backend --net localNet --ip 192.168.0.5 cloud-web-backend
+
+#linux下运行
+docker run -d -p 8123:8123 --name cloud-web-backend \
+-v /home/pcl/command:/home/gateway_config \
+--net localNet --ip 192.168.0.5 cloud-web-backend
+
 docker run -it -p 8123:8123 --name cloud-web-backend --net localNet --ip 192.168.0.5 cloud-web-backend  /bin/bash

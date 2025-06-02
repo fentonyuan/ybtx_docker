@@ -1,18 +1,24 @@
 {
     "launchMode": "cloudMode",
-    "innerReceivePort": 8080,
+    "innerReceivePort": 9090,
 
     "edgeIp": "127.0.0.1",
-    "edgePort": 8081,
+    "edgePort": 9091,
 
     "recordDatabaseUser": "root",
     "recordDatabasePassword": "123456",
-    "recordDatabaseHost": "127.0.0.1",
+    "recordDatabaseHost": "192.168.0.2",
     "recordDatabasePort": 3306,
     "recordDatabaseName": "monitor",
+
+    "radiusDatabaseUser": "root",
+    "radiusDatabasePassword": "123456",
+    "radiusDatabaseHost": "192.168.0.2",
+    "radiusDatabasePort": 3306,
+    "radiusDatabaseName": "radius",
 
     "commandFolderPath": "./command",
 
     "isOutputLogAsFile": true,
-    "logFilePath": "./log.file"
+    "logFilePath": "./log/log.file"
 }
