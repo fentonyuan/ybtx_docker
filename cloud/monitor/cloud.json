@@ -19,6 +19,6 @@
 
     "commandFolderPath": "./command",
 
-    "isOutputLogAsFile": false,
+    "isOutputLogAsFile": true,
     "logFilePath": "./log/log.file"
 }
