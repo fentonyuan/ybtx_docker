@@ -2,7 +2,7 @@ docker build -t cloud-monitor .
 
 #设置命令下发文件夹 设置日志报错文件夹 日志文件
 docker run -d --name cloud-monitor  \
--p 3344:8080 -v /home/pcl/log :/app/log \
+-p 9090:9090 -v /home/pcl/log :/app/log \
 -v /home/pcl/command:/app/command \
 -v /home/pcl/cloud_report:/app/cloud_report \
 cloud-monitor

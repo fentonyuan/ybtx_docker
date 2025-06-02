@@ -7,13 +7,13 @@
 
     "recordDatabaseUser": "root",
     "recordDatabasePassword": "123456",
-    "recordDatabaseHost": "127.0.0.1",
+    "recordDatabaseHost": "192.168.0.2",
     "recordDatabasePort": 3306,
     "recordDatabaseName": "monitor",
 
     "radiusDatabaseUser": "root",
     "radiusDatabasePassword": "123456",
-    "radiusDatabaseHost": "127.0.0.1",
+    "radiusDatabaseHost": "192.168.0.2",
     "radiusDatabasePort": 3306,
     "radiusDatabaseName": "radius",
 

@@ -12,7 +12,7 @@ COPY ./config/sources.list /home/sources.list
 WORKDIR /home
 
 # 创建必要的目录
-RUN mkdir -p logs regist/certs/certs regist/certs/keys
+RUN mkdir -p logs regist/certs/certs regist/certs/keys /home/gateway_config
 
 # 设置环境变量
 # ===== 基本配置 =====
@@ -140,7 +140,7 @@ ENV CONFIG_FILE_AES_KEY_PATH=keys/configmanager/config_exec/aes_test_key.bin
 # 网关配置生成模块配置
 ENV CONFIG_GEN_ENABLED=true             
 ENV CONFIG_GEN_ENABLE_AUTO_GENERATION=true  
-ENV CONFIG_GEN_STORAGE_PATH=           
+ENV CONFIG_GEN_STORAGE_PATH=/home/gateway_config           
 ENV CONFIG_GEN_ENABLE_API_TRIGGER=true  
 ENV CONFIG_GEN_ENABLE_EVENT_TRIGGER=true 
 ENV CONFIG_GEN_POLL_INTERVAL=30        
