@@ -1,20 +1,19 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : docker-gate
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 80041
- Source Host           : 127.0.0.1:3308
+ Source Server Version : 80028
+ Source Host           : localhost:3306
  Source Schema         : edge_monitor
 
  Target Server Type    : MySQL
- Target Server Version : 80041
+ Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 01/06/2025 22:15:53
+ Date: 02/06/2025 18:00:28
 */
 
-use edge_monitor;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -23,11 +22,11 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `device_runtime_status`;
 CREATE TABLE `device_runtime_status`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(0) NOT NULL AUTO_INCREMENT,
   `device_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `cpu_usage` float NULL DEFAULT NULL,
   `memory_usage` float NULL DEFAULT NULL,
-  `upload_time` datetime NULL DEFAULT NULL,
+  `upload_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
@@ -42,18 +41,32 @@ CREATE TABLE `gateway`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for user_login_status
+-- ----------------------------
+DROP TABLE IF EXISTS `user_login_status`;
+CREATE TABLE `user_login_status`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `user_login_status` int(0) NULL DEFAULT NULL,
+  `user_auth_status` int(0) NULL DEFAULT NULL,
+  `user_online_duration` int(0) NULL DEFAULT NULL,
+  `user_upload_time` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for user_operation
 -- ----------------------------
 DROP TABLE IF EXISTS `user_operation`;
 CREATE TABLE `user_operation`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(0) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `behavior_type` int NULL DEFAULT NULL,
-  `data_type` int NULL DEFAULT NULL,
+  `behavior_type` int(0) NULL DEFAULT NULL,
+  `data_type` int(0) NULL DEFAULT NULL,
   `data_size` double NULL DEFAULT NULL,
   `gateway_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `behavior_time` datetime NULL DEFAULT NULL,
+  `behavior_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 402 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 402 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

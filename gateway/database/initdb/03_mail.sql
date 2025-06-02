@@ -14,6 +14,7 @@
  Date: 01/06/2025 20:57:32
 */
 
+use mail;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
