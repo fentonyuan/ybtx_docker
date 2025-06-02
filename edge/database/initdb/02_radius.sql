@@ -113,8 +113,8 @@ CREATE TABLE `radcheck`  (
 -- Records of radcheck
 -- ----------------------------
 INSERT INTO `radcheck` VALUES (1, 'eap', 'Cleartext-Password', ':=', 'eap', '1111');
-INSERT INTO `radcheck` VALUES (2, 'gate_01', 'Cleartext-Password', ':=', '123456', '1212');
-INSERT INTO `radcheck` VALUES (3, 'gate_02', 'Cleartext-Password', ':=', '666666', '8888');
+INSERT INTO `radcheck` VALUES (2, 'gate01', 'Cleartext-Password', ':=', '123456', '1212');
+INSERT INTO `radcheck` VALUES (3, 'gate02', 'Cleartext-Password', ':=', '666666', '8888');
 
 -- ----------------------------
 -- Table structure for radgroupcheck

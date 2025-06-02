@@ -11,9 +11,9 @@
  Target Server Version : 80039
  File Encoding         : 65001
 
- Date: 02/06/2025 10:15:47
+ Date: 02/06/2025 14:57:15
 */
-
+use radius;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -101,6 +101,8 @@ INSERT INTO `radacct` VALUES (7, 'a636ab44-acfa-455e-9f61-7a4e023d74cc', 'c5097c
 INSERT INTO `radacct` VALUES (8, '886dcb4f-7383-49d0-8509-5549907b41ba', 'e70b5e72897de1a985c6ab9fa5832127', 'edge_01', '', '127.0.0.1', '1', '', '2025-06-02 02:06:59', '2025-06-02 02:06:59', NULL, NULL, 0, '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '');
 INSERT INTO `radacct` VALUES (9, 'f727adbb-48a6-4467-8057-686265dd0f44', '817851c0f0e1df9651e1ffc2b44aea64', 'edge_01', '', '127.0.0.1', '1', '', '2025-06-02 02:07:39', '2025-06-02 02:07:40', NULL, NULL, 0, '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '');
 INSERT INTO `radacct` VALUES (10, '983888df-88e9-4735-96b1-9f46e329ba34', '7074056ff68e483feab861744d7c7108', 'edge_01', '', '127.0.0.1', '1', '', '2025-06-02 02:08:03', '2025-06-02 02:08:03', NULL, NULL, 0, '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `radacct` VALUES (11, '4bdac550-9ffe-4e61-b884-97852921e729', '9eb09c6a5405965ae5dba91b9e4c7d1a', 'edge_01', '', '127.0.0.1', '1', '', '2025-06-02 06:31:28', '2025-06-02 06:31:28', NULL, NULL, 0, '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `radacct` VALUES (12, 'fa963436-d735-43d2-ba66-8c67fb47d304', 'cd4932962bea86233afd87e16ce12363', 'edge_01', '', '127.0.0.1', '1', '', '2025-06-02 06:36:43', '2025-06-02 06:36:43', NULL, NULL, 0, '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for radcheck
@@ -121,8 +123,8 @@ CREATE TABLE `radcheck`  (
 -- Records of radcheck
 -- ----------------------------
 INSERT INTO `radcheck` VALUES (1, 'eap', 'Cleartext-Password', ':=', 'eap', '1111');
-INSERT INTO `radcheck` VALUES (2, 'edge_01', 'Cleartext-Password', ':=', '123456', '1111');
-INSERT INTO `radcheck` VALUES (3, 'edge_02', 'Cleartext-Password', ':=', '666666', '1111');
+INSERT INTO `radcheck` VALUES (2, 'edge01', 'Cleartext-Password', ':=', '123456', '1111');
+INSERT INTO `radcheck` VALUES (3, 'edge02', 'Cleartext-Password', ':=', '666666', '1111');
 
 -- ----------------------------
 -- Table structure for radgroupcheck
@@ -194,6 +196,14 @@ INSERT INTO `radpostauth` VALUES (13, 'edge_01', '0x38a990115055808541ed097abdf0
 INSERT INTO `radpostauth` VALUES (14, 'edge_01', '0xbeeec6d7c9474fdbcca3071d9f197a8da4', 'Access-Accept', '2025-06-02 02:06:59.000000', NULL);
 INSERT INTO `radpostauth` VALUES (15, 'edge_01', '0x2e5c6565790424a2cf2a4c15cbb5a72ac0', 'Access-Accept', '2025-06-02 02:07:39.000000', NULL);
 INSERT INTO `radpostauth` VALUES (16, 'edge_01', '0xbbc34b4951522b1dfb038e81e5cf8310ad', 'Access-Accept', '2025-06-02 02:08:03.000000', NULL);
+INSERT INTO `radpostauth` VALUES (17, 'eap', '0x0c18b5ddd2b91aaa313c625f3d16d42683', 'Access-Accept', '2025-06-02 02:28:50.000000', NULL);
+INSERT INTO `radpostauth` VALUES (18, 'eap', '0xe4904c06dfc4de35599a27f826503d8be2', 'Access-Accept', '2025-06-02 02:41:59.000000', NULL);
+INSERT INTO `radpostauth` VALUES (19, 'eap', '0xde79d132598777e4fd91422ff13c64de3e', 'Access-Accept', '2025-06-02 02:42:50.000000', NULL);
+INSERT INTO `radpostauth` VALUES (20, 'eap', '0x05b4de111375bd64e933044927176b2b36', 'Access-Accept', '2025-06-02 02:46:00.000000', NULL);
+INSERT INTO `radpostauth` VALUES (21, 'eap', '0x080fd2199e3acc3971912ef7c8045de98a', 'Access-Reject', '2025-06-02 02:58:05.000000', NULL);
+INSERT INTO `radpostauth` VALUES (22, 'eap', '0xa73ec29533600800cb3472ee2b452c2d58', 'Access-Accept', '2025-06-02 02:58:25.000000', NULL);
+INSERT INTO `radpostauth` VALUES (23, 'edge_01', '0xa75f455f0e213995142136c497ae0673f7', 'Access-Accept', '2025-06-02 06:31:28.000000', NULL);
+INSERT INTO `radpostauth` VALUES (24, 'edge_01', '0x90d7d102c18f4fb186075809288c2aee79', 'Access-Accept', '2025-06-02 06:36:43.000000', NULL);
 
 -- ----------------------------
 -- Table structure for radreply

@@ -23,6 +23,6 @@
 
     "isOutputLogAsFile": true,
     "logFilePath": "./log.file",
-    "exePath": "./auth/certification.exe",
+    "exePath": "./auth/certification",
     "configFile": "./auth/config.json"
 }
