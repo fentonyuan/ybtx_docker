@@ -26,7 +26,8 @@ RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
 
 WORKDIR /etc/freeradius/3.0/certs
 
-RUN  chmod 400 /etc/freeradius/3.0/certs/dh \
+RUN  && chown freerad:freerad /etc/freeradius/3.0/certs/dh \
+    && chmod 400 /etc/freeradius/3.0/certs/dh \
     && chmod 755 /etc/freeradius/3.0/certs/server.pem \
     && chmod 755 /etc/freeradius/3.0/certs/server.key \
     && chmod 640 /etc/freeradius/3.0/certs/ca.pem \
