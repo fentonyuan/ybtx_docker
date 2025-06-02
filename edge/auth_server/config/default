@@ -285,9 +285,9 @@ listen {
 authorize {
 
 	sql
-	#update reply {
-       # Token := "%{exec:/etc/freeradius/3.0/code/token.sh}"
-   # }
+	update reply {
+        Token := "%{exec:/etc/freeradius/3.0/code/token.sh}"
+    }
 
 	 # 检查用户是否存在，例如从数据库中查询
     if (User-Name == "valid_user") {
