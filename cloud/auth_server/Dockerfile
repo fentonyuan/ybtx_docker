@@ -4,12 +4,13 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
 
 COPY config/ /home/
+COPY output/ /home/output
 
 RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g; \
              s|http://security.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g' /etc/apt/sources.list \
     && apt-get clean \
     && apt-get update \
-    && apt-get install -y openssl libssl-dev freeradius freeradius-mysql python3 python3-pip nano \
+    && apt-get install -y openssl libssl-dev freeradius freeradius-mysql python3 python3-pip nano redis \
     && pip3 install cryptography -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
@@ -38,7 +39,10 @@ RUN make all \
     && chmod 755 /etc/freeradius/3.0/certs/server.key \
     && chmod 640 /etc/freeradius/3.0/certs/ca.pem \
     && chown root:freerad /etc/freeradius/3.0/certs/ca.pem \
-    && ln -s /etc/freeradius/3.0/sites-available/coa /etc/freeradius/3.0/sites-enabled/
+    && ln -s /etc/freeradius/3.0/sites-available/coa /etc/freeradius/3.0/sites-enabled/ \
+    && service redis-server start \
+    && chmod 777 /home/output/police.json
+
 
 EXPOSE 1812 1813
 
