@@ -1,161 +1,210 @@
-###########################################################################
-# $Id: 2d0fb7e137f9d6f6a2a48d65e013841ed2bfadf9 $                 #
-#                                                                         #
-#  schema.sql                       rlm_sql - FreeRADIUS SQL Module       #
-#                                                                         #
-#     Database schema for MySQL rlm_sql module                            #
-#                                                                         #
-#     To load:                                                            #
-#         mysql -uroot -prootpass radius < schema.sql                     #
-#                                                                         #
-#                                   Mike Machado <mike@innercite.com>     #
-###########################################################################
-#
-# Table structure for table 'radacct'
-#
+/*
+ Navicat Premium Data Transfer
 
-use radius;
-CREATE TABLE IF NOT EXISTS radacct (
-  radacctid bigint(21) NOT NULL auto_increment,
-  acctsessionid varchar(64) NOT NULL default '',
-  acctuniqueid varchar(32) NOT NULL default '',
-  username varchar(64) NOT NULL default '',
-  realm varchar(64) default '',
-  nasipaddress varchar(15) NOT NULL default '',
-  nasportid varchar(15) default NULL,
-  nasporttype varchar(32) default NULL,
-  acctstarttime datetime NULL default NULL,
-  acctupdatetime datetime NULL default NULL,
-  acctstoptime datetime NULL default NULL,
-  acctinterval int(12) default NULL,
-  acctsessiontime int(12) unsigned default NULL,
-  acctauthentic varchar(32) default NULL,
-  connectinfo_start varchar(50) default NULL,
-  connectinfo_stop varchar(50) default NULL,
-  acctinputoctets bigint(20) default NULL,
-  acctoutputoctets bigint(20) default NULL,
-  calledstationid varchar(50) NOT NULL default '',
-  callingstationid varchar(50) NOT NULL default '',
-  acctterminatecause varchar(32) NOT NULL default '',
-  servicetype varchar(32) default NULL,
-  framedprotocol varchar(32) default NULL,
-  framedipaddress varchar(15) NOT NULL default '',
-  framedipv6address varchar(45) NOT NULL default '',
-  framedipv6prefix varchar(45) NOT NULL default '',
-  framedinterfaceid varchar(44) NOT NULL default '',
-  delegatedipv6prefix varchar(45) NOT NULL default '',
-  PRIMARY KEY (radacctid),
-  UNIQUE KEY acctuniqueid (acctuniqueid),
-  KEY username (username),
-  KEY framedipaddress (framedipaddress),
-  KEY framedipv6address (framedipv6address),
-  KEY framedipv6prefix (framedipv6prefix),
-  KEY framedinterfaceid (framedinterfaceid),
-  KEY delegatedipv6prefix (delegatedipv6prefix),
-  KEY acctsessionid (acctsessionid),
-  KEY acctsessiontime (acctsessiontime),
-  KEY acctstarttime (acctstarttime),
-  KEY acctinterval (acctinterval),
-  KEY acctstoptime (acctstoptime),
-  KEY nasipaddress (nasipaddress)
-) ENGINE = INNODB;
+ Source Server         : 10.1.160.101
+ Source Server Type    : MySQL
+ Source Server Version : 80039
+ Source Host           : 10.1.160.101:3306
+ Source Schema         : radius
 
-#
-# Table structure for table 'radcheck'
-#
+ Target Server Type    : MySQL
+ Target Server Version : 80039
+ File Encoding         : 65001
 
-CREATE TABLE IF NOT EXISTS radcheck (
-  id int(11) unsigned NOT NULL auto_increment,
-  username varchar(64) NOT NULL default '',
-  attribute varchar(64)  NOT NULL default '',
-  op char(2) NOT NULL DEFAULT '==',
-  value varchar(253) NOT NULL default '',
-  PRIMARY KEY  (id),
-  KEY username (username(32))
-);
+ Date: 01/06/2025 22:18:04
+*/
 
-#
-# Table structure for table 'radgroupcheck'
-#
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
-CREATE TABLE IF NOT EXISTS radgroupcheck (
-  id int(11) unsigned NOT NULL auto_increment,
-  groupname varchar(64) NOT NULL default '',
-  attribute varchar(64)  NOT NULL default '',
-  op char(2) NOT NULL DEFAULT '==',
-  value varchar(253)  NOT NULL default '',
-  PRIMARY KEY  (id),
-  KEY groupname (groupname(32))
-);
+-- ----------------------------
+-- Table structure for nas
+-- ----------------------------
+DROP TABLE IF EXISTS `nas`;
+CREATE TABLE `nas`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nasname` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shortname` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'other',
+  `ports` int NULL DEFAULT NULL,
+  `secret` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'secret',
+  `server` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `community` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'RADIUS Client',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `nasname`(`nasname` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
-#
-# Table structure for table 'radgroupreply'
-#
+-- ----------------------------
+-- Records of nas
+-- ----------------------------
 
-CREATE TABLE IF NOT EXISTS radgroupreply (
-  id int(11) unsigned NOT NULL auto_increment,
-  groupname varchar(64) NOT NULL default '',
-  attribute varchar(64)  NOT NULL default '',
-  op char(2) NOT NULL DEFAULT '=',
-  value varchar(253)  NOT NULL default '',
-  PRIMARY KEY  (id),
-  KEY groupname (groupname(32))
-);
+-- ----------------------------
+-- Table structure for radacct
+-- ----------------------------
+DROP TABLE IF EXISTS `radacct`;
+CREATE TABLE `radacct`  (
+  `radacctid` bigint NOT NULL AUTO_INCREMENT,
+  `acctsessionid` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `acctuniqueid` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `username` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `realm` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '',
+  `nasipaddress` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `nasportid` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `nasporttype` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `acctstarttime` datetime NULL DEFAULT NULL,
+  `acctupdatetime` datetime NULL DEFAULT NULL,
+  `acctstoptime` datetime NULL DEFAULT NULL,
+  `acctinterval` int NULL DEFAULT NULL,
+  `acctsessiontime` int UNSIGNED NULL DEFAULT NULL,
+  `acctauthentic` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `connectinfo_start` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `connectinfo_stop` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `acctinputoctets` bigint NULL DEFAULT NULL,
+  `acctoutputoctets` bigint NULL DEFAULT NULL,
+  `calledstationid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `callingstationid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `acctterminatecause` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `servicetype` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `framedprotocol` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `framedipaddress` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `framedipv6address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `framedipv6prefix` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `framedinterfaceid` varchar(44) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `delegatedipv6prefix` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`radacctid`) USING BTREE,
+  UNIQUE INDEX `acctuniqueid`(`acctuniqueid` ASC) USING BTREE,
+  INDEX `username`(`username` ASC) USING BTREE,
+  INDEX `framedipaddress`(`framedipaddress` ASC) USING BTREE,
+  INDEX `framedipv6address`(`framedipv6address` ASC) USING BTREE,
+  INDEX `framedipv6prefix`(`framedipv6prefix` ASC) USING BTREE,
+  INDEX `framedinterfaceid`(`framedinterfaceid` ASC) USING BTREE,
+  INDEX `delegatedipv6prefix`(`delegatedipv6prefix` ASC) USING BTREE,
+  INDEX `acctsessionid`(`acctsessionid` ASC) USING BTREE,
+  INDEX `acctsessiontime`(`acctsessiontime` ASC) USING BTREE,
+  INDEX `acctstarttime`(`acctstarttime` ASC) USING BTREE,
+  INDEX `acctinterval`(`acctinterval` ASC) USING BTREE,
+  INDEX `acctstoptime`(`acctstoptime` ASC) USING BTREE,
+  INDEX `nasipaddress`(`nasipaddress` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
-#
-# Table structure for table 'radreply'
-#
+-- ----------------------------
+-- Records of radacct
+-- ----------------------------
+INSERT INTO `radacct` VALUES (1, '734d2981-a9a6-4b3b-ac5a-04066fb969fd', '68721f47376ed5f684ba3e854c0ac2c2', 'edge_01', '', '127.0.0.1', '1', '', '2025-06-01 13:22:10', '2025-06-01 13:22:10', '2025-06-01 13:22:10', NULL, NULL, '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '');
 
-CREATE TABLE IF NOT EXISTS radreply (
-  id int(11) unsigned NOT NULL auto_increment,
-  username varchar(64) NOT NULL default '',
-  attribute varchar(64) NOT NULL default '',
-  op char(2) NOT NULL DEFAULT '=',
-  value varchar(253) NOT NULL default '',
-  PRIMARY KEY  (id),
-  KEY username (username(32))
-);
+-- ----------------------------
+-- Table structure for radcheck
+-- ----------------------------
+DROP TABLE IF EXISTS `radcheck`;
+CREATE TABLE `radcheck`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `attribute` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `op` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '==',
+  `value` varchar(253) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `mac_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `username`(`username`(32) ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
+-- ----------------------------
+-- Records of radcheck
+-- ----------------------------
+INSERT INTO `radcheck` VALUES (1, 'eap', 'Cleartext-Password', ':=', 'eap', '1111');
+INSERT INTO `radcheck` VALUES (2, 'gate_01', 'Cleartext-Password', ':=', '123456', '1212');
+INSERT INTO `radcheck` VALUES (3, 'gate_02', 'Cleartext-Password', ':=', '666666', '8888');
 
-#
-# Table structure for table 'radusergroup'
-#
+-- ----------------------------
+-- Table structure for radgroupcheck
+-- ----------------------------
+DROP TABLE IF EXISTS `radgroupcheck`;
+CREATE TABLE `radgroupcheck`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `groupname` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `attribute` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `op` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '==',
+  `value` varchar(253) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `groupname`(`groupname`(32) ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE IF NOT EXISTS radusergroup (
-  id int(11) unsigned NOT NULL auto_increment,
-  username varchar(64) NOT NULL default '',
-  groupname varchar(64) NOT NULL default '',
-  priority int(11) NOT NULL default '1',
-  PRIMARY KEY  (id),
-  KEY username (username(32))
-);
+-- ----------------------------
+-- Records of radgroupcheck
+-- ----------------------------
 
-#
-# Table structure for table 'radpostauth'
-#
-CREATE TABLE IF NOT EXISTS radpostauth (
-  id int(11) NOT NULL auto_increment,
-  username varchar(64) NOT NULL default '',
-  pass varchar(64) NOT NULL default '',
-  reply varchar(32) NOT NULL default '',
-  authdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY  (id),
-  KEY username (username(32))
-) ENGINE = INNODB;
+-- ----------------------------
+-- Table structure for radgroupreply
+-- ----------------------------
+DROP TABLE IF EXISTS `radgroupreply`;
+CREATE TABLE `radgroupreply`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `groupname` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `attribute` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `op` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '=',
+  `value` varchar(253) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `groupname`(`groupname`(32) ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
-#
-# Table structure for table 'nas'
-#
-CREATE TABLE IF NOT EXISTS nas (
-  id int(10) NOT NULL auto_increment,
-  nasname varchar(128) NOT NULL,
-  shortname varchar(32),
-  type varchar(30) DEFAULT 'other',
-  ports int(5),
-  secret varchar(60) DEFAULT 'secret' NOT NULL,
-  server varchar(64),
-  community varchar(50),
-  description varchar(200) DEFAULT 'RADIUS Client',
-  PRIMARY KEY (id),
-  KEY nasname (nasname)
-);
+-- ----------------------------
+-- Records of radgroupreply
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for radpostauth
+-- ----------------------------
+DROP TABLE IF EXISTS `radpostauth`;
+CREATE TABLE `radpostauth`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pass` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reply` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `authdate` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `class` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `username`(`username`(32) ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of radpostauth
+-- ----------------------------
+INSERT INTO `radpostauth` VALUES (1, 'edge_01', '0x11b14861990240cfa3be9a9fd2aa83d2d0', 'Access-Reject', '2025-06-01 13:20:09.000000', NULL);
+INSERT INTO `radpostauth` VALUES (2, 'edge_01', '0x614e0577cbbcae6c5034a0a9eb8cc187af', 'Access-Accept', '2025-06-01 13:22:10.000000', NULL);
+
+-- ----------------------------
+-- Table structure for radreply
+-- ----------------------------
+DROP TABLE IF EXISTS `radreply`;
+CREATE TABLE `radreply`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `attribute` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `op` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '=',
+  `value` varchar(253) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `username`(`username`(32) ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of radreply
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for radusergroup
+-- ----------------------------
+DROP TABLE IF EXISTS `radusergroup`;
+CREATE TABLE `radusergroup`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `groupname` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `priority` int NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `username`(`username`(32) ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of radusergroup
+-- ----------------------------
+
+SET FOREIGN_KEY_CHECKS = 1;
