@@ -1,2 +1,9 @@
 docker build -t edge-monitor .
-docker run -d --name cloud-monitor  -p 3345:8081 -v /d/log/edge:/app/log edge-monitor
+
+#设置命令下发文件夹 设置日志报错文件夹 日志文件
+docker run -d --name edge-monitor  \
+-p 9091:9091 -v /home/pcl/log:/app/log \
+--net localNet --ip 192.168.0.4 edge-monitor
+
+docker run -it --name edge-monitor  \
+-p 9091:9090 -v /home/pcl/log:/app/log /bin/bash

@@ -1,3 +1,0 @@
-docker build -t cloud-auth-client .
-docker run -it --name cloud-auth-client --net localNet --ip 192.168.0.4 cloud-auth-client /bin/bash
-docker exec -it cloud-auth-client /bin/bash

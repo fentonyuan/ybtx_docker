@@ -9,7 +9,7 @@ RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|
     && apt-get clean \
     && apt-get update \
     && apt-get install -y openssl libssl-dev freeradius freeradius-mysql python3 python3-pip nano redis redis-server cron\
-    && pip3 install cryptography
+    && pip3 install cryptography -i https://mirrors.aliyun.com/pypi/simple/
 
 RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
     && mv /home/sql /etc/freeradius/3.0/mods-available/sql \
@@ -26,7 +26,7 @@ RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
 
 WORKDIR /etc/freeradius/3.0/certs
 
-RUN  && chown freerad:freerad /etc/freeradius/3.0/certs/dh \
+RUN chown freerad:freerad /etc/freeradius/3.0/certs/dh \
     && chmod 400 /etc/freeradius/3.0/certs/dh \
     && chmod 755 /etc/freeradius/3.0/certs/server.pem \
     && chmod 755 /etc/freeradius/3.0/certs/server.key \
