@@ -1,6 +1,6 @@
 -- 创建数据库
 CREATE DATABASE IF NOT EXISTS radius CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE DATABASE IF NOT EXISTS gin_server CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS edge_monitor CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- 创建用户 test 并设置密码
 CREATE USER IF NOT EXISTS 'radius'@'%' IDENTIFIED BY '123456';

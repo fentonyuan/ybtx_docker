@@ -1,20 +1,28 @@
 {
     "launchMode": "edgeMode",
-    "innerReceivePort": 8081,
+    "innerReceivePort": 9091,
     
     "gatewayIp": "127.0.0.1",
-    "gatewayPort": 8082,
+    "gatewayPort": 9092,
 
     "recordDatabaseUser": "root",
     "recordDatabasePassword": "123456",
-    "recordDatabaseHost": "127.0.0.1",
+    "recordDatabaseHost": "192.168.0.2",
     "recordDatabasePort": 3306,
-    "recordDatabaseName": "edge-monitor",
+    "recordDatabaseName": "edge_monitor",
 
-    "upstreamDeviceHost": "127.0.0.1",
-    "upstreamDevicePort": 8080,
-    "deviceId": "20001",
+    "radiusDatabaseUser": "root",
+    "radiusDatabasePassword": "123456",
+    "radiusDatabaseHost": "192.168.0.2",
+    "radiusDatabasePort": 3306,
+    "radiusDatabaseName": "radius",
+
+    "upstreamDeviceHost": "192.168.0.2",
+    "upstreamDevicePort": 9090,
+    "deviceId": "edge_01",
 
     "isOutputLogAsFile": true,
-    "logFilePath": "./log.file"
+    "logFilePath": "./log.file",
+    "exePath": "./auth/certification.exe",
+    "configFile": "./auth/config.json"
 }
