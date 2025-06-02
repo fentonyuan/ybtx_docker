@@ -22,12 +22,12 @@
     "ca-cert" : "./auth/ca.pem",
     "client_cert": "",
     "client_key": "",
-    "nas-ip-address":"10.1.160.102",
+    "nas-ip-address":"10.1.160.103",
     "dictionary_path": "./auth/radius_dictionary",
 
     "method": "password",
-    "username": "eap",
-    "password": "eap",
+    "username": "edge02",
+    "password": "666666",
     "mac": "",
     "cert": "",
     "key": "",
@@ -35,7 +35,7 @@
 
     "upstreamDeviceHost": "10.1.160.101",
     "upstreamDevicePort": 9090,
-    "deviceId": "gate01",
+    "deviceId": "gate02",
 
     "isOutputLogAsFile": true,
     "logFilePath": "./log/log.file",
