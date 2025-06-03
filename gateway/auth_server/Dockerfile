@@ -39,11 +39,6 @@ RUN chown freerad:freerad /etc/freeradius/3.0/certs/dh \
     && chmod 777 /home/output/police.json \
     && chmod +x /etc/freeradius/3.0/code/check_inactive.sh
 
-RUN echo "* * * * * /bin/bash /etc/freeradius/3.0/code/check_inactive.sh >> /var/log/radacct_cron.log 2>&1" > /etc/cron.d/radius-cron \
-    && chmod 0644 /etc/cron.d/radius-cron \
-    && crontab /etc/cron.d/radius-cron \
-    && dos2unix /etc/freeradius/3.0/code/check_inactive.sh
-
 
 EXPOSE 1812 1813
 
