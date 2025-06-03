@@ -1,0 +1,2 @@
+docker build -t gateway-web-backend .
+docker run -d -p 8080:8080 gateway-web-backend

@@ -1,0 +1,77 @@
+spring:
+  application:
+    name: mail
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.0.2:3306/mail
+    username: root
+    password: 123456
+  servlet:
+    multipart:
+      #最大单个文件大小
+      max-file-size: 1024MB
+      #单个请求最大文件大小
+      max-request-size: 10240MB
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+pagehelper:
+  reasonable: true
+  helper-dialect: mysql
+
+gateway:
+  id: ID1
+  longAddress: FAWKH2H2FSJ6F4DG6FNO5YIXTXCVZT3RBTSOALMYREQKI5PRFFJM4C4FYBBZIULMUY7KCIXRN6NMZGS7HKDYEGBDGWO7FTR5ZYV6SWA
+  sendPort: 12222
+  receivePort: 23333
+  loggerPath: C:\Users\杨渡翔\Desktop\project\QAX
+  accesses:
+    - VA:LIXKFVXVVYEXWEGMGDCYGN5RAQSDLDR2YOQDPYUI6TKVAIWBWRLA=139.129.37.221:20620
+    - VA:YYFYDQRYNANVYALKBZEJ2YDLN7ZI6UJGCCKWW6JVYVTP2DTHWUDQ=47.104.82.65:22249
+  outlets:
+    - VA:M5JCZHHZV7MQAKHXWAYMHZQA4WS23DELKG4T2PM2WAVIOOLI6WMA
+    - VA:NSJZX3FNJ7WMZREFTPBWZKIMX5RDFBXLR7NNO5RUB6ODGNFHMIYA
+  email-suffix: aa.com
+  routers:
+    - suffix: bb.com
+      gateway-id: ID2
+      short-address: VA:2KDNQ2GYEIWIS4OZEMAGJ3LDULCWK3A6W3SWDP4DPYGBOXPG3AYQ
+    - suffix: cc.com
+      gateway-id: ID3
+      short-address: VA:WTK3WZTFHSJUXMJCL3JYLCOVMZKNLBIHBKRJLTYEO3VMBXIZEZ7Q
+
+# 有关文件的配置信息
+file:
+  send-dir: C:\Users\杨渡翔\Desktop\project\sender
+  receive-dir: C:\Users\杨渡翔\Desktop\project\receiver
+  upload-dir: C:\Users\杨渡翔\Desktop\project
+  aes-key: zSbcY8W5CVqtUNtZ2UB8zA==
+  security-dir: C:\Users\杨渡翔\Desktop\security
+
+# 有关密钥协商的配置信息
+secretkey:
+  receiver-material-dir: D:\Download\helper\ID1
+  receiver-material-path:  D:\Download\helper\ID1\neg_info.bin
+  sender-material-dir: D:\Download\helper\ID1
+  sender-material-path: D:\Download\helper\ID1\neg_info.bin
+
+  creator-path: D:\Download\sdk\creator.exe
+  sender-path:  D:\Download\sdk\sender.exe
+  receiver-path: D:\Download\sdk\receiver.exe
+
+# 与monitor集成的代码
+monitor:
+  monitor-host: 127.0.0.1
+  monitor-port: 8085
+
+
+
+
