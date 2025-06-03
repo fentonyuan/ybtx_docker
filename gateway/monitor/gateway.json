@@ -1,17 +1,87 @@
 {
     "launchMode": "gateMode",
-    "innerReceivePort": 8082,
+    "innerReceivePort": 9092,
 
     "recordDatabaseUser": "root",
     "recordDatabasePassword": "123456",
-    "recordDatabaseHost": "127.0.0.1",
+    "recordDatabaseHost": "192.168.0.2",
     "recordDatabasePort": 3306,
     "recordDatabaseName": "mail",
 
-    "upstreamDeviceHost": "127.0.0.1",
-    "upstreamDevicePort": 8081,
-    "deviceId": "10001",
+    "mailDatabaseUser": "root",
+    "mailDatabasePassword": "123456",
+    "mailDatabaseHost": "192.168.0.2",
+    "mailDatabasePort": 3306,
+    "mailDatabaseName": "mail",
+
+    "upstreamDeviceHost": "10.1.160.102",
+    "upstreamDevicePort": 9091,
+    "deviceId": "ID1",
 
     "isOutputLogAsFile": true,
-    "logFilePath": "./log/log.file"
+    "logFilePath": "./log/log.file",
+
+    "exePath": "./auth/certification",
+    "radius-server" : "10.1.160.102",
+    "radius-secret" : "testing123",
+    "ca-cert" : "./auth/ca.pem",
+    "client_cert": "",
+    "client_key": "",
+    "nas-ip-address":"10.1.160.104",
+    "dictionary_path": "./auth/radius_dictionary",
+
+    "method": "password",
+    "username": "eap",
+    "password": "eap",
+    "mac": "",
+    "cert": "",
+    "key": "",
+    "keypass": "",
+
+    "gateway": {
+        "id": "ID1",
+        "longAddress": "FAWKH2H2FSJ6F4DG6FNO5YIXTXCVZT3RBTSOALMYREQKI5PRFFJM4C4FYBBZIULMUY7KCIXRN6NMZGS7HKDYEGBDGWO7FTR5ZYV6SWA",
+        "sendPort": 12222,
+        "receivePort": 23333,
+        "loggerPath": "./log_QAX",
+        "accesses": [
+            "VA:LIXKFVXVVYEXWEGMGDCYGN5RAQSDLDR2YOQDPYUI6TKVAIWBWRLA=139.129.37.221:20620",
+            "VA:YYFYDQRYNANVYALKBZEJ2YDLN7ZI6UJGCCKWW6JVYVTP2DTHWUDQ=47.104.82.65:22249"
+        ],
+        "outlets": [
+            "VA:M5JCZHHZV7MQAKHXWAYMHZQA4WS23DELKG4T2PM2WAVIOOLI6WMA",
+            "VA:NSJZX3FNJ7WMZREFTPBWZKIMX5RDFBXLR7NNO5RUB6ODGNFHMIYA"
+        ],
+        "email-suffix": "aa.com",
+        "routers": [
+            {
+                "suffix": "bb.com",
+                "gateway-id": "ID2",
+                "short-address": "VA:2KDNQ2GYEIWIS4OZEMAGJ3LDULCWK3A6W3SWDP4DPYGBOXPG3AYQ"
+            },
+            {
+                "suffix": "cc.com",
+                "gateway-id": "ID3",
+                "short-address": "VA:WTK3WZTFHSJUXMJCL3JYLCOVMZKNLBIHBKRJLTYEO3VMBXIZEZ7Q"
+            }
+        ]
+    },
+
+    "file": {
+        "send-dir": "./file_buffer/sender_buffer",
+        "receive-dir": "./file_buffer/receiver_buffer",
+        "upload-dir": "./file_buffer",
+        "aes-key": "./zSbcY8W5CVqtUNtZ2UB8zA==",
+        "security-dir": "./file_buffer/security_store"
+    },
+
+    "secretkey": {
+        "receiver-material-dir": "./gateway_dependency/secretkey/ID1",
+        "receiver-material-path": "./gateway_dependency/secretkey/ID1/neg_info.bin",
+        "sender-material-dir": "./gateway_dependency/secretkey/ID1",
+        "sender-material-path": "./gateway_dependency/secretkey/ID1",
+        "creator-path": "./gateway_dependency/linux/creator.bin",
+        "sender-path": "./gateway_dependency/linux/sender.bin",
+        "receiver-path": "./gateway_dependency/linux/receiver.bin"
+    }
 }
