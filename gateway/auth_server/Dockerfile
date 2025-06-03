@@ -9,8 +9,8 @@ RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|
              s|http://security.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g' /etc/apt/sources.list \
     && apt-get clean \
     && apt-get update \
-    && apt-get install -y openssl libssl-dev freeradius freeradius-mysql python3 python3-pip nano redis redis-server cron\
-    && pip3 install cryptography -i https://pypi.tuna.tsinghua.edu.cn/simple
+    && apt-get install -y openssl libssl-dev freeradius freeradius-mysql python3 python3-pip nano mysql-server redis redis-server cron dos2unix systemctl\
+    && pip3 install cryptography redis -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
     && mv /home/sql /etc/freeradius/3.0/mods-available/sql \
@@ -23,7 +23,9 @@ RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
     && mv /home/exec /etc/freeradius/3.0/mods-enabled/exec \
     && mv /home/queries.conf /etc/freeradius/3.0/mods-config/sql/main/mysql/queries.conf \
     && mv -T /home/code /etc/freeradius/3.0/code \
-    && mv -T /home/keys /etc/freeradius/3.0/keys
+    && mv -T /home/keys /etc/freeradius/3.0/keys \
+    && service redis-server start \
+    && systemctl start redis
 
 WORKDIR /etc/freeradius/3.0/certs
 
@@ -36,10 +38,6 @@ RUN chown freerad:freerad /etc/freeradius/3.0/certs/dh \
     && service redis-server start \
     && chmod 777 /home/output/police.json \
     && chmod +x /etc/freeradius/3.0/code/check_inactive.sh
-
-RUN echo "* * * * * /bin/bash /etc/freeradius/3.0/code/check_inactive.sh >> /var/log/radacct_cron.log 2>&1" > /etc/cron.d/radius-cron \
-    && chmod 0644 /etc/cron.d/radius-cron \
-    && crontab /etc/cron.d/radius-cron
 
 
 EXPOSE 1812 1813
