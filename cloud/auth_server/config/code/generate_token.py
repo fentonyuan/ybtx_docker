@@ -29,7 +29,7 @@ private_key_path = '/etc/freeradius/3.0/keys/private_key.pem'
 
 # 生成数据
 timestamp = int(time.time())
-expiry = 600
+expiry = 6000
 nonce_bytes = os.urandom(4)  # 生成随机 nonce（4字节）
 nonce_b64 = base64.urlsafe_b64encode(nonce_bytes).decode().rstrip("=")
 data = {
