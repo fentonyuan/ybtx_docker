@@ -17,12 +17,28 @@
     "radiusDatabasePort": 3306,
     "radiusDatabaseName": "radius",
 
-    "upstreamDeviceHost": "192.168.0.2",
+    "radius-server" : "10.1.160.101",
+    "radius-secret" : "testing123",
+    "ca-cert" : "./auth/ca.pem",
+    "client_cert": "",
+    "client_key": "",
+    "nas-ip-address":"10.1.160.102",
+    "dictionary_path": "./auth/radius_dictionary",
+
+    "method": "password",
+    "username": "eap",
+    "password": "eap",
+    "mac": "",
+    "cert": "",
+    "key": "",
+    "keypass": "",
+
+    "upstreamDeviceHost": "10.1.160.101",
     "upstreamDevicePort": 9090,
-    "deviceId": "edge_01",
+    "deviceId": "gate01",
 
     "isOutputLogAsFile": true,
-    "logFilePath": "./log.file",
-    "exePath": "./auth/certification",
-    "configFile": "./auth/config.json"
+    "logFilePath": "./log/log.file",
+    "exePath": "./auth/certification"
+
 }

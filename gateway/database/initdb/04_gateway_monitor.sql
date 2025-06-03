@@ -14,6 +14,7 @@
  Date: 01/06/2025 22:16:04
 */
 
+use gateway_monitor;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 

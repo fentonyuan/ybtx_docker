@@ -1,0 +1,44 @@
+{
+    "launchMode": "edgeMode",
+    "innerReceivePort": 9091,
+    
+    "gatewayIp": "127.0.0.1",
+    "gatewayPort": 9092,
+
+    "recordDatabaseUser": "root",
+    "recordDatabasePassword": "123456",
+    "recordDatabaseHost": "192.168.0.2",
+    "recordDatabasePort": 3306,
+    "recordDatabaseName": "edge_monitor",
+
+    "radiusDatabaseUser": "root",
+    "radiusDatabasePassword": "123456",
+    "radiusDatabaseHost": "192.168.0.2",
+    "radiusDatabasePort": 3306,
+    "radiusDatabaseName": "radius",
+
+    "radius-server" : "10.1.160.101",
+    "radius-secret" : "testing123",
+    "ca-cert" : "./auth/ca.pem",
+    "client_cert": "",
+    "client_key": "",
+    "nas-ip-address":"10.1.160.103",
+    "dictionary_path": "./auth/radius_dictionary",
+
+    "method": "password",
+    "username": "edge02",
+    "password": "666666",
+    "mac": "",
+    "cert": "",
+    "key": "",
+    "keypass": "",
+
+    "upstreamDeviceHost": "10.1.160.101",
+    "upstreamDevicePort": 9090,
+    "deviceId": "gate02",
+
+    "isOutputLogAsFile": true,
+    "logFilePath": "./log/log.file",
+    "exePath": "./auth/certification"
+
+}

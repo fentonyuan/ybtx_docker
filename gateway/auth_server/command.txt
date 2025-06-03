@@ -1,0 +1,4 @@
+docker build -t gateway-auth-server .
+docker run -d --name gateway-auth-server --network host gateway-auth-server
+
+docker exec -it gateway-auth-server /bin/bash

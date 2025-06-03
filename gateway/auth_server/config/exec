@@ -1,0 +1,66 @@
+# -*- text -*-
+#
+#  $Id$
+
+#
+#  Execute external programs
+#
+#  This module is useful only for 'xlat'.  To use it,
+#  put 'exec' into the 'instantiate' section.  You can then
+#  do dynamic translation of attributes like:
+#
+#  Attribute-Name = `%{exec:/path/to/program args}`
+#
+#  The value of the attribute will be replaced with the output
+#  of the program which is executed.  Due to RADIUS protocol
+#  limitations, any output over 253 bytes will be ignored.
+#
+#  The RADIUS attributes from the user request will be placed
+#  into environment variables of the executed program, as
+#  described in "man unlang" and in doc/configuration/variables.rst
+#
+#  See also "echo" for more sample configuration.
+#
+exec {
+#	wait = yes
+#	input_pairs = request
+#	shell_escape = yes
+#	timeout = 10
+}
+#生成token
+exec token_script {
+    wait = yes
+    program = "/usr/bin/python3  /etc/freeradius/3.0/code/generate_token.py %{User-Name} %{NAS-IP-Address}"
+    input_pairs = request
+    output_pairs = reply
+}
+
+exec validate_token_python {
+ wait = yes
+ input = "Token=%{Token}"
+ program = "/usr/bin/python3 /etc/freeradius/3.0/code/validate_token.py %{Token}"
+ output = "ok" # 如果只需要一个输出值 "ok"，就这样保持
+}
+exec policy_reply {
+ wait = yes
+ program = "/usr/bin/python3 /etc/freeradius/3.0/code/long_config.py %{CURRENT-ACK}" # 传递用户名作为参数
+	#output_pairs = "both"
+ output_pairs = "reply"
+ shell_escape = no
+ escape_args = no
+ unpack = yes
+}
+
+exec token_time {
+    wait = yes
+    program = "/usr/bin/python3 /etc/freeradius/3.0/code/time.py "
+    input_pairs = request
+    output_pairs = reply
+}
+
+exec token_nonce {
+    wait = yes
+    program = "/usr/bin/python3  /etc/freeradius/3.0/code/generate_new_token.py %{Token}"
+    input_pairs = request
+    output_pairs = reply
+}

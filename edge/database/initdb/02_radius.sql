@@ -170,8 +170,8 @@ CREATE TABLE `radpostauth`  (
 -- ----------------------------
 -- Records of radpostauth
 -- ----------------------------
-INSERT INTO `radpostauth` VALUES (1, 'edge_01', '0x11b14861990240cfa3be9a9fd2aa83d2d0', 'Access-Reject', '2025-06-01 13:20:09.000000', NULL);
-INSERT INTO `radpostauth` VALUES (2, 'edge_01', '0x614e0577cbbcae6c5034a0a9eb8cc187af', 'Access-Accept', '2025-06-01 13:22:10.000000', NULL);
+INSERT INTO `radpostauth` VALUES (1, 'edge01', '0x11b14861990240cfa3be9a9fd2aa83d2d0', 'Access-Reject', '2025-06-01 13:20:09.000000', NULL);
+INSERT INTO `radpostauth` VALUES (2, 'edge01', '0x614e0577cbbcae6c5034a0a9eb8cc187af', 'Access-Accept', '2025-06-01 13:22:10.000000', NULL);
 
 -- ----------------------------
 -- Table structure for radreply

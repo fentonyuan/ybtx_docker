@@ -1,2 +1,2 @@
-docker build -t database:gateway .
-docker run -d -p 3306:3306 --name gateway-database --net localNet --ip 192.168.0.2 database:gateway
+docker build -t gateway-database .
+docker run -d -p 3306:3306 --name gateway-database --net localNet --ip 192.168.0.2 gateway-database
