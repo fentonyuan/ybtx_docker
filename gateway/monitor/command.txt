@@ -1,4 +1,5 @@
 docker build -t gateway-monitor .
+
 docker run -d --name gateway-monitor  \
 -p 9092:9092 -p 12222:12222 -p 23333:23333 \
 -v /home/pcl/log:/app/log \

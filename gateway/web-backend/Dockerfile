@@ -9,7 +9,12 @@ COPY mail-backend.jar app.jar
 
 # （可选）复制配置文件
 COPY application.yml /app/application.yml
-RUN apt-get update && apt-get install -y fontconfig
+
+RUN apt-get update && apt-get install -y fontconfig \
+&& mkdir /app/auth \
+&& chmod 777 ./auth/certification
+
+COPY auth /app/auth
 
 # 暴露端口（Spring Boot 默认是 8080）
 EXPOSE 8080
