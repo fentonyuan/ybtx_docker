@@ -5,7 +5,8 @@ RUN mkdir /home/cloud-frontend \
     && apt-get update \
     && apt-get install -y nginx \
     && apt-get install -y zip \
-    && mv /home/sources.list /etc/apt/sources.list
+    && mv /home/sources.list /etc/apt/sources.list \
+    && mv /home/certs /etc/nginx/
 
 WORKDIR /home
 RUN unzip -d ./cloud-frontend dist.zip \
