@@ -1,2 +1,2 @@
 docker build -t gateway-web-frontend .
-docker run -d --name gateway-web-frontend -p 5173:80 gateway-web-frontend
+docker run -d --name gateway-web-frontend -p 5173:80  --net localNet --ip 192.168.0.3 gateway-web-frontend
