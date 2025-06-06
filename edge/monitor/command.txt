@@ -7,3 +7,5 @@ docker run -d --name edge-monitor  \
 
 docker run -it --name edge-monitor  \
 -p 9091:9090 -v /home/pcl/log:/app/log /bin/bash
+
+docker run -d --name edge-monitor -p 9091:9091 -v /home/pcl/log:/app/log edge-monitor

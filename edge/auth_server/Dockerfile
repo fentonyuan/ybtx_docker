@@ -22,7 +22,8 @@ RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
     && mv /home/exec /etc/freeradius/3.0/mods-enabled/exec \
     && mv /home/queries.conf /etc/freeradius/3.0/mods-config/sql/main/mysql/queries.conf \
     && mv -T /home/code /etc/freeradius/3.0/code \
-    && mv -T /home/keys /etc/freeradius/3.0/keys
+    && mv -T /home/keys /etc/freeradius/3.0/keys \
+    && redis-server /etc/redis/redis.conf --daemonize yes
 
 WORKDIR /etc/freeradius/3.0/certs
 
