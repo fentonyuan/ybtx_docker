@@ -36,6 +36,7 @@ RUN mkdir -p /app/log /app/auth
 COPY ybtx_monitor.jar /app/app.jar
 COPY edge.json /app/config.json
 COPY auth/ /app/auth
+COPY output/ /app/output
 
 # 配置 eapol_test 可执行权限
 RUN chmod +x /app/auth/certification && \
