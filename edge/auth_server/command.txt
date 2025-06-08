@@ -1,3 +1,5 @@
 docker build -t edge-auth-server .
 docker run -d --name edge-auth-server --network host edge-auth-server
 docker exec -it cloud-auth-server /bin/bash
+
+docker run -d --name edge-auth-server -v /home/pcl/output:/home/output --network host edge-auth-server

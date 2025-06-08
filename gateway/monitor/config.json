@@ -14,6 +14,12 @@
     "mailDatabasePort": 3306,
     "mailDatabaseName": "mail",
 
+    "radiusDatabaseUser": "root",
+    "radiusDatabasePassword": "123456",
+    "radiusDatabaseHost": "10.1.160.104",
+    "radiusDatabasePort": 3306,
+    "radiusDatabaseName": "radius",
+
     "upstreamDeviceHost": "10.1.160.102",
     "upstreamDevicePort": 9091,
     "deviceId": "ID1",
@@ -29,6 +35,7 @@
     "client_key": "",
     "nas-ip-address":"10.1.160.104",
     "dictionary_path": "./auth/radius_dictionary",
+    "public_key_path": "./auth/public_key.pem",
 
     "method": "password",
     "username": "eap",
