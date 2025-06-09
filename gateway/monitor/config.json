@@ -78,7 +78,7 @@
         "send-dir": "./file_buffer/sender_buffer",
         "receive-dir": "./file_buffer/receiver_buffer",
         "upload-dir": "./file_buffer",
-        "aes-key": "./zSbcY8W5CVqtUNtZ2UB8zA==",
+        "aes-key": "zSbcY8W5CVqtUNtZ2UB8zA==",
         "security-dir": "./file_buffer/security_store"
     },
 
@@ -86,7 +86,7 @@
         "receiver-material-dir": "./gateway_dependency/secretkey/ID1",
         "receiver-material-path": "./gateway_dependency/secretkey/ID1/neg_info.bin",
         "sender-material-dir": "./gateway_dependency/secretkey/ID1",
-        "sender-material-path": "./gateway_dependency/secretkey/ID1",
+        "sender-material-path": "./gateway_dependency/secretkey/ID1/neg_info.bin",
         "creator-path": "./gateway_dependency/linux/creator.bin",
         "sender-path": "./gateway_dependency/linux/sender.bin",
         "receiver-path": "./gateway_dependency/linux/receiver.bin"
