@@ -4,7 +4,12 @@ docker run -it --name gateway-web-backend  \
 -p 8080:8080 \
 --net localNet --ip 192.168.0.5 gateway-web-backend /bin/bash
 
-sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g; s|http://security.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g' /etc/apt/sources.list \
-    && apt-get clean \
-    && apt-get update \
-    && apt-get install -y fontconfig
+/*
+ gateway-web-backend运行语句
+ application.yml配置文件也需要进行更改
+*/
+docker run -d --name gateway-web-backend \
+  -p 8080:8080 \
+  --net localNet --ip 192.168.0.5 \
+  -v /home/pcl/gateway/monitor/file_buffer:/app/file_buffer \
+  gateway-web-backend
