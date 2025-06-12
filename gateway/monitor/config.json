@@ -4,19 +4,19 @@
 
     "recordDatabaseUser": "root",
     "recordDatabasePassword": "123456",
-    "recordDatabaseHost": "10.1.160.104",
+    "recordDatabaseHost": "127.0.0.1",
     "recordDatabasePort": 3306,
-    "recordDatabaseName": "mail",
+    "recordDatabaseName": "gateway_monitor",
 
     "mailDatabaseUser": "root",
     "mailDatabasePassword": "123456",
-    "mailDatabaseHost": "10.1.160.104",
+    "mailDatabaseHost": "127.0.0.1",
     "mailDatabasePort": 3306,
     "mailDatabaseName": "mail",
 
     "radiusDatabaseUser": "root",
     "radiusDatabasePassword": "123456",
-    "radiusDatabaseHost": "10.1.160.104",
+    "radiusDatabaseHost": "127.0.0.1",
     "radiusDatabasePort": 3306,
     "radiusDatabaseName": "radius",
 
@@ -37,43 +37,42 @@
     "dictionary_path": "./auth/radius_dictionary",
     "public_key_path": "./auth/public_key.pem",
 
-    "method": "password",
-    "username": "eap",
-    "password": "eap",
-    "mac": "",
-    "cert": "",
-    "key": "",
+    "method": "certificate",
+    "username": "gate01",
+    "password": "123456",
+    "mac": "1212",
+    "cert": "./auth/gate01.crt",
+    "key": "./auth/gate01.key",
     "keypass": "",
 
     "gateway": {
         "id": "ID1",
-        "longAddress": "FAWKH2H2FSJ6F4DG6FNO5YIXTXCVZT3RBTSOALMYREQKI5PRFFJM4C4FYBBZIULMUY7KCIXRN6NMZGS7HKDYEGBDGWO7FTR5ZYV6SWA",
+        "longAddress": "VAWOQTGOT34FUGXASJVG66QZPVUJQFIAAP2XQLPNF2YR4JPU6IW5TOKOIXC7KC235QSTRD54UIN4KY6KXIMQL4ZP3FG3KCRBF4ATGCA",
         "sendPort": 12222,
         "receivePort": 23333,
         "loggerPath": "./log_QAX",
         "accesses": [
-            "VA:LIXKFVXVVYEXWEGMGDCYGN5RAQSDLDR2YOQDPYUI6TKVAIWBWRLA=139.129.37.221:20620",
-            "VA:YYFYDQRYNANVYALKBZEJ2YDLN7ZI6UJGCCKWW6JVYVTP2DTHWUDQ=47.104.82.65:22249"
+                "VA:LIXKFVXVVYEXWEGMGDCYGN5RAQSDLDR2YOQDPYUI6TKVAIWBWRLA=139.129.37.221:20620",
+                "VA:YYFYDQRYNANVYALKBZEJ2YDLN7ZI6UJGCCKWW6JVYVTP2DTHWUDQ=47.104.82.65:22249"
         ],
         "outlets": [
-            "VA:M5JCZHHZV7MQAKHXWAYMHZQA4WS23DELKG4T2PM2WAVIOOLI6WMA",
-            "VA:NSJZX3FNJ7WMZREFTPBWZKIMX5RDFBXLR7NNO5RUB6ODGNFHMIYA"
+                "VA:M5JCZHHZV7MQAKHXWAYMHZQA4WS23DELKG4T2PM2WAVIOOLI6WMA",
+                "VA:NSJZX3FNJ7WMZREFTPBWZKIMX5RDFBXLR7NNO5RUB6ODGNFHMIYA"
         ],
         "email-suffix": "aa.com",
         "routers": [
-            {
-                "suffix": "bb.com",
-                "gateway-id": "ID2",
-                "short-address": "VA:2KDNQ2GYEIWIS4OZEMAGJ3LDULCWK3A6W3SWDP4DPYGBOXPG3AYQ"
-            },
-            {
-                "suffix": "cc.com",
-                "gateway-id": "ID3",
-                "short-address": "VA:WTK3WZTFHSJUXMJCL3JYLCOVMZKNLBIHBKRJLTYEO3VMBXIZEZ7Q"
-            }
-        ]
+                {
+                    "suffix": "bb.com",
+                    "gateway-id": "ID2",
+                    "short-address": "VA:LFKL6UJRORRPARECV4IS2AGPEWLJ4P4AZ4DRJAMUDCDT5GZC55UQ"
+                },
+                {
+                    "suffix": "cc.com",
+                    "gateway-id": "ID3",
+                    "short-address": "VA:WTK3WZTFHSJUXMJCL3JYLCOVMZKNLBIHBKRJLTYEO3VMBXIZEZ7Q"
+                }
+            ]
     },
-
     "file": {
         "send-dir": "./file_buffer/sender_buffer",
         "receive-dir": "./file_buffer/receiver_buffer",
@@ -87,9 +86,10 @@
         "receiver-material-path": "./gateway_dependency/secretkey/ID1/neg_info.bin",
         "sender-material-dir": "./gateway_dependency/secretkey/ID1",
         "sender-material-path": "./gateway_dependency/secretkey/ID1/neg_info.bin",
-        "creator-path": "./gateway_dependency/linux/creator.bin",
-        "sender-path": "./gateway_dependency/linux/sender.bin",
-        "receiver-path": "./gateway_dependency/linux/receiver.bin"
+        "creator-path": "./gateway_dependency/liunx/creator.bin",
+        "sender-path": "./gateway_dependency/liunx/sender.bin",
+        "receiver-path": "./gateway_dependency/liunx/receiver.bin"
     },
-       "ternimal-ip": "10.1.160.104"
+    
+    "terminalIp": "127.0.0.1"
 }
