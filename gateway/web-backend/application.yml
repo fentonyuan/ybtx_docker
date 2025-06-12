@@ -37,8 +37,8 @@ gateway:
 # 有关文件的配置信息
 file:
   upload-dir: /app/file_buffer
+  aes-key: zSbcY8W5CVqtUNtZ2UB8zA==
   security-dir: /app/file_buffer/security_store
-
 # 与monitor集成的代码
 monitor:
   monitor-host: 10.1.160.104

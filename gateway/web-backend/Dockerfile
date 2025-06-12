@@ -1,25 +1,31 @@
-# 使用 Java 运行环境基础镜像
+# 使用基础镜像
 FROM openjdk:17-jdk-slim
 
-# 指定工作目录
+# 设置工作目录
 WORKDIR /app
 
-# 将 jar 包复制到容器中
-COPY mail-backend.jar app.jar
+# 更换 apt 源并安装字体
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g; \
+            s|http://security.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g' /etc/apt/sources.list \
+    && apt-get clean \
+    && apt-get update \
+    && apt-get install -y fontconfig fonts-dejavu-core \
+    && rm -rf /var/lib/apt/lists/*
 
-# （可选）复制配置文件
+# 复制 jar 包和配置文件
+COPY mail-backend.jar app.jar
 COPY application.yml /app/application.yml
 
 RUN apt-get update && apt-get install -y fontconfig \
 && mkdir /app/auth \
 && chmod 777 ./auth/certification
 
+# 认证配置
 COPY auth /app/auth
 
-# 暴露端口（Spring Boot 默认是 8080）
+# 暴露端口
 EXPOSE 8080
 
-# 容器启动时运行 jar 包
-CMD ["java", "-jar", "/app/app.jar"]
-# 启动 Jar应用
-# ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "app.jar"]
+# 设置启动命令
+CMD ["java","-jar", "/app/app.jar"]
+

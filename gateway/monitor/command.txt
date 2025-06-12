@@ -6,6 +6,9 @@ docker run -d --name gateway-monitor  \
 -v /home/pcl/log:/app/log \
 --net localNet --ip 192.168.0.4 gateway-monitor
 
+# 需要授予file_buffer所有权限才能使得程序访问文件夹
+chmod 777 ./file_buffer
+
 105网关monitor config.json
 {
     "launchMode": "gateMode",
