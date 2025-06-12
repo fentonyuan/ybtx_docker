@@ -24,7 +24,7 @@
     "upstreamDevicePort": 9091,
     "deviceId": "ID1",
 
-    "isOutputLogAsFile": false,
+    "isOutputLogAsFile": true,
     "logFilePath": "./log/log.file",
 
     "exePath": "./auth/certification",
