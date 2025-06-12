@@ -1,6 +1,6 @@
 {
     "launchMode": "edgeMode",
-    "deviceId": "000000000001",
+    "deviceId": "000000000002",
 
     "monitorCommunication": {
         "innerReceivePort": 9091,
@@ -41,16 +41,16 @@
         "ca-cert" : "./auth/ca.pem",
         "client_cert": "",
         "client_key": "",
-        "nas-ip-address":"10.1.160.102",
+        "nas-ip-address":"10.1.160.103",
         "dictionary_path": "./auth/radius_dictionary",
         "public_key_path": "./auth/public_key.pem",
 
         "method": "certificate",
-        "username": "000000000001",
+        "username": "000000000002",
         "password": "softP@SSWD!",
         "mac": "1111",
-        "cert": "./auth/000000000001.crt",
-        "key": "./auth/000000000001.key",
+        "cert": "./auth/000000000002.crt",
+        "key": "./auth/000000000002.key",
         "keypass": "",
 
         "exePath": "./auth/certification"

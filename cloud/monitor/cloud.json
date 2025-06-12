@@ -1,24 +1,42 @@
 {
     "launchMode": "cloudMode",
-    "innerReceivePort": 9090,
 
-    "edgeIp": "127.0.0.1",
-    "edgePort": 9091,
+    "monitorCommunication": {
+        "innerReceivePort": 9090,
+        "downStreamPort": 9091
+    },
 
-    "recordDatabaseUser": "root",
-    "recordDatabasePassword": "123456",
-    "recordDatabaseHost": "192.168.0.2",
-    "recordDatabasePort": 3306,
-    "recordDatabaseName": "monitor",
+    "datasets": {
+        "recordDatabaseUser": "root",
+        "recordDatabasePassword": "123456",
+        "recordDatabaseHost": "192.168.0.2",
+        "recordDatabasePort": 3306,
+        "recordDatabaseName": "cloud_monitor",
 
-    "radiusDatabaseUser": "root",
-    "radiusDatabasePassword": "123456",
-    "radiusDatabaseHost": "192.168.0.2",
-    "radiusDatabasePort": 3306,
-    "radiusDatabaseName": "radius",
+        "radiusDatabaseUser": "root",
+        "radiusDatabasePassword": "123456",
+        "radiusDatabaseHost": "192.168.0.2",
+        "radiusDatabasePort": 3306,
+        "radiusDatabaseName": "radius",
+
+        "cloudDatabaseUser": "root",
+        "cloudDatabasePassword": "123456",
+        "cloudDatabaseHost": "192.168.0.2",
+        "cloudDatabasePort": 3306,
+        "cloudDatabaseName": "gin_server"
+    },
 
     "commandFolderPath": "./command",
 
-    "isOutputLogAsFile": true,
-    "logFilePath": "./log/log.file"
+    "uploadRecord":{
+        "uploadInterval": 300000,
+        "freeDataBaseRecordInterval": 864000000,
+        "sendJsonPost": "http://10.1.160.101:8123/api/post/log"
+    },
+
+    "runtimeLog": {
+        "isOutputLogAsFile": true,
+        "logFilePath": "./log/log.file",
+        "createNewLogFileInterval": 864000000
+    }
 }
