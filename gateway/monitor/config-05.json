@@ -1,10 +1,10 @@
 {
     "launchMode": "gateMode",
-    "deviceId": "000000000100",
+    "deviceId": "000000000101",
 
     "monitorCommunication": {
         "innerReceivePort": 9092,
-        "upstreamDeviceHost": "10.1.160.102",
+        "upstreamDeviceHost": "10.1.160.103",
         "upstreamDevicePort": 9091
     },
 
@@ -29,21 +29,21 @@
     },
 
     "auth": {
-        "radius-server" : "10.1.160.102",
+        "radius-server" : "10.1.160.103",
         "radius-secret" : "testing123",
         "ca-cert" : "./auth/ca.pem",
         "client_cert": "",
         "client_key": "",
-        "nas-ip-address":"10.1.160.104",
+        "nas-ip-address":"10.1.160.105",
         "dictionary_path": "./auth/radius_dictionary",
         "public_key_path": "./auth/public_key.pem",
 
         "method": "certificate",
-        "username": "000000000100",
+        "username": "000000000101",
         "password": "deviceP@SSWD!",
         "mac": "1111",
-        "cert": "./auth/000000000100.crt",
-        "key": "./auth/000000000100.key",
+        "cert": "./auth/000000000101.crt",
+        "key": "./auth/000000000101.key",
         "keypass": "",
         "exePath": "./auth/certification",
         "configFile": "./auth/config.json"
