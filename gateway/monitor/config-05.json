@@ -50,7 +50,7 @@
     },
 
     "runtimeLog": {
-        "isOutputLogAsFile": false,
+        "isOutputLogAsFile": true,
         "logFilePath": "./log/log.file",
         "createNewLogFileInterval": 864000000
     },
@@ -66,7 +66,7 @@
         "longAddress": "BQI3JWCVWCPQGNSOCXSWZ5D3LYBDIFGDGJJXKU6Y6RBANFFVY4GFSVF7KEYXIYXQISBK6EJNADHSLFU6H6AM6BYUQGKBRBZ6TMRO62I",
         "sendPort": 12222,
         "receivePort": 23333,
-        "loggerPath": "./log_QAX",
+        "loggerPath": "./log",
         "accesses": [
             "VA:LIXKFVXVVYEXWEGMGDCYGN5RAQSDLDR2YOQDPYUI6TKVAIWBWRLA=139.129.37.221:20620",
             "VA:YYFYDQRYNANVYALKBZEJ2YDLN7ZI6UJGCCKWW6JVYVTP2DTHWUDQ=47.104.82.65:22249"
@@ -103,10 +103,10 @@
         "receiver-material-path": "./gateway_dependency/secretkey/ID2/neg_info.bin",
         "sender-material-dir": "./gateway_dependency/secretkey/ID2",
         "sender-material-path": "./gateway_dependency/secretkey/ID2/neg_info.bin",
-        "creator-path": "./gateway_dependency/windows/creator.exe",
-        "sender-path": "./gateway_dependency/windows/sender.exe",
-        "receiver-path": "./gateway_dependency/windows/receiver.exe"
+        "creator-path": "./gateway_dependency/liunx/creator.bin",
+        "sender-path": "./gateway_dependency/liunx/sender.bin",
+        "receiver-path": "./gateway_dependency/liunx/receiver.bin"
     },
 
-    "terminalIp": "10.1.160.104"
+    "terminalIp": "10.1.160.105"
 }
