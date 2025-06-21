@@ -1,6 +1,6 @@
 {
     "launchMode": "gateMode",
-    "deviceId": "000000000100",
+    "deviceId": "ID1",
 
     "monitorCommunication": {
         "innerReceivePort": 9092,
@@ -39,33 +39,35 @@
         "public_key_path": "/home/pcl/gateway/monitor/auth/public_key.pem",
 
         "method": "certificate",
-        "username": "000000000100",
+        "username": "ID1",
         "password": "deviceP@SSWD!",
         "mac": "1111",
-        "cert": "/home/pcl/gateway/monitor/auth/000000000100.crt",
-        "key": "/home/pcl/gateway/monitor/auth/000000000100.key",
+        "cert": "/home/pcl/gateway/monitor/auth/ID1.crt",
+        "key": "/home/pcl/gateway/monitor/auth/ID1.key",
         "keypass": "",
         "exePath": "/home/pcl/gateway/monitor/auth/certification"
     },
 
     "runtimeLog": {
-        "isOutputLogAsFile": false,
-        "logFilePath": "./log/log.file",
+        "isOutputLogAsFile": true,
+        "logFileFolder": "./log",
         "createNewLogFileInterval": 864000000
     },
-
     "uploadRecord":{
-        "uploadInitDelay": 3000000,
-        "uploadInterval": 300000,
+        "uploadInitDelay": 60000,
+        "uploadRecordInterval": 60000,
         "freeDataBaseRecordInterval": 864000000
     },
 
     "gateway": {
         "id": "ID1",
-        "longAddress": "VAWOQTGOT34FUGXASJVG66QZPVUJQFIAAP2XQLPNF2YR4JPU6IW5TOKOIXC7KC235QSTRD54UIN4KY6KXIMQL4ZP3FG3KCRBF4ATGCA",
+        "email-suffix": "aa.com",
+        "terminalIp": "127.0.0.1",
+        "shortAddress": "VA:WZ2IATPGEZCHRAPTSKI4VWBN5YNKWQY5MCOZRA7OVKUEHRCCYTZA",
+        "longAddress": "A6BDN5YF6HWEG3N3YFZOBS4IYA75SCPYRS34SVS42K2KROV6DWA3M5EAJXTCMRDYQHZZFEOK3AW64GVLIMOWBHMYQPXKVKCDYRBMJ4Q",
         "sendPort": 12222,
         "receivePort": 23333,
-        "loggerPath": "./log_QAX",
+        "loggerPath": "./log/",
         "accesses": [
                 "VA:LIXKFVXVVYEXWEGMGDCYGN5RAQSDLDR2YOQDPYUI6TKVAIWBWRLA=139.129.37.221:20620",
                 "VA:YYFYDQRYNANVYALKBZEJ2YDLN7ZI6UJGCCKWW6JVYVTP2DTHWUDQ=47.104.82.65:22249"
@@ -73,20 +75,7 @@
         "outlets": [
                 "VA:M5JCZHHZV7MQAKHXWAYMHZQA4WS23DELKG4T2PM2WAVIOOLI6WMA",
                 "VA:NSJZX3FNJ7WMZREFTPBWZKIMX5RDFBXLR7NNO5RUB6ODGNFHMIYA"
-        ],
-        "email-suffix": "aa.com",
-        "routers": [
-                {
-                    "suffix": "bb.com",
-                    "gateway-id": "ID2",
-                    "short-address": "VA:LFKL6UJRORRPARECV4IS2AGPEWLJ4P4AZ4DRJAMUDCDT5GZC55UQ"
-                },
-                {
-                    "suffix": "cc.com",
-                    "gateway-id": "ID3",
-                    "short-address": "VA:WTK3WZTFHSJUXMJCL3JYLCOVMZKNLBIHBKRJLTYEO3VMBXIZEZ7Q"
-                }
-            ]
+        ]
     },
     "file": {
         "send-dir": "./file_buffer/sender_buffer",
@@ -104,7 +93,5 @@
         "creator-path": "./gateway_dependency/liunx/creator.bin",
         "sender-path": "./gateway_dependency/liunx/sender.bin",
         "receiver-path": "./gateway_dependency/liunx/receiver.bin"
-    },
-    
-    "terminalIp": "127.0.0.1"
+    }
 }

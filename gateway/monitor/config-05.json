@@ -1,6 +1,6 @@
 {
     "launchMode": "gateMode",
-    "deviceId": "000000000101",
+    "deviceId": "ID2",
 
     "monitorCommunication": {
         "innerReceivePort": 9092,
@@ -39,11 +39,11 @@
         "public_key_path": "./auth/public_key.pem",
 
         "method": "certificate",
-        "username": "000000000101",
+        "username": "ID2",
         "password": "deviceP@SSWD!",
         "mac": "1111",
-        "cert": "./auth/000000000101.crt",
-        "key": "./auth/000000000101.key",
+        "cert": "./auth/ID2.crt",
+        "key": "./auth/ID2.key",
         "keypass": "",
         "exePath": "./auth/certification",
         "configFile": "./auth/config.json"
@@ -51,19 +51,22 @@
 
     "runtimeLog": {
         "isOutputLogAsFile": true,
-        "logFilePath": "./log/log.file",
+        "logFileFolder": "./log",
         "createNewLogFileInterval": 864000000
     },
 
     "uploadRecord":{
-        "uploadInitDelay": 3000000,
-        "uploadInterval": 300000,
+        "uploadInitDelay": 60000,
+        "uploadRecordInterval": 300000,
         "freeDataBaseRecordInterval": 864000000
     },
 
     "gateway": {
         "id": "ID2",
-        "longAddress": "BQI3JWCVWCPQGNSOCXSWZ5D3LYBDIFGDGJJXKU6Y6RBANFFVY4GFSVF7KEYXIYXQISBK6EJNADHSLFU6H6AM6BYUQGKBRBZ6TMRO62I",
+        "email-suffix": "bb.com",
+        "terminalIp": "127.0.0.1",
+        "shortAddress": "VA:VEEFVD7RN27JGGWETLD55H6TJQNTNQE44L3WDT5RMESZIGSLUIDA",
+        "longAddress": "STT74H3T2TPMD33INCCDTUD57OHHUIVAZW2ZT6NEG545BOFE64W2SCC2R7YW5PUTDLCJVR66T7JUYGZWYCOOF53BZ6YWCJMUDJF2EBQ",
         "sendPort": 12222,
         "receivePort": 23333,
         "loggerPath": "./log",
@@ -74,19 +77,6 @@
         "outlets": [
             "VA:M5JCZHHZV7MQAKHXWAYMHZQA4WS23DELKG4T2PM2WAVIOOLI6WMA",
             "VA:NSJZX3FNJ7WMZREFTPBWZKIMX5RDFBXLR7NNO5RUB6ODGNFHMIYA"
-        ],
-        "email-suffix": "bb.com",
-        "routers": [
-            {
-                "suffix": "aa.com",
-                "gateway-id": "ID1",
-                "short-address": "VA:3G4U4ROF6UFVX3BFHCH3ZIQ3YVR4VOQZAXZS7WKNWUFCCLYBGMEA"
-            },
-            {
-                "suffix": "cc.com",
-                "gateway-id": "ID3",
-                "short-address": "VA:WTK3WZTFHSJUXMJCL3JYLCOVMZKNLBIHBKRJLTYEO3VMBXIZEZ7Q"
-            }
         ]
     },
 
@@ -106,7 +96,5 @@
         "creator-path": "./gateway_dependency/liunx/creator.bin",
         "sender-path": "./gateway_dependency/liunx/sender.bin",
         "receiver-path": "./gateway_dependency/liunx/receiver.bin"
-    },
-
-    "terminalIp": "10.1.160.105"
+    }
 }
