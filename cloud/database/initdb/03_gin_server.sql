@@ -14,6 +14,7 @@
  Date: 23/06/2025 14:41:04
 */
 
+use gin_server;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
