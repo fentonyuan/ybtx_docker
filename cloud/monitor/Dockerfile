@@ -1,5 +1,5 @@
 # 使用 OpenJDK 11 作为基础镜像
-FROM openjdk:11-jre-slim
+FROM monitor:base
 
 # 创建工作目录
 WORKDIR /app

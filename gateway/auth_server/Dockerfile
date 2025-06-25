@@ -1,16 +1,6 @@
-FROM ubuntu:20.04
-
-ARG DEBIAN_FRONTEND=noninteractive
-ENV TZ=Etc/UTC
+FROM cloud-auth-server:base
 
 COPY config/ /home/
-
-RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g; \
-             s|http://security.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g' /etc/apt/sources.list \
-    && apt-get clean \
-    && apt-get update \
-    && apt-get install -y openssl libssl-dev freeradius freeradius-mysql python3 python3-pip nano mysql-server redis redis-server cron dos2unix systemctl\
-    && pip3 install cryptography redis -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
     && mv /home/sql /etc/freeradius/3.0/mods-available/sql \
@@ -37,9 +27,13 @@ RUN chown freerad:freerad /etc/freeradius/3.0/certs/dh \
     && ln -s /etc/freeradius/3.0/sites-available/coa /etc/freeradius/3.0/sites-enabled/ \
     && service redis-server start \
     && chmod 777 /home/output/police.json \
-    && chmod +x /etc/freeradius/3.0/code/check_inactive.sh
+    && chmod +x /etc/freeradius/3.0/code/check_inactive.sh \
+    && dos2unix /home/startup.sh
 
+# 给启动脚本执行权限
+RUN chmod +x /home/startup.sh
 
-EXPOSE 1812 1813
+EXPOSE 1812/udp 1813/udp 3799/udp
 
-CMD ["freeradius", "-f", "-X"]
+# 使用你提供的启动脚本作为入口
+ENTRYPOINT ["/home/startup.sh"]
