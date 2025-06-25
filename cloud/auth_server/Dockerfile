@@ -1,18 +1,6 @@
-FROM ubuntu:20.04
-
-ARG DEBIAN_FRONTEND=noninteractive
-ENV TZ=Etc/UTC
+FROM cloud-auth-server:base
 
 COPY config/ /home/
-
-RUN apt-get update && apt-get install -y ca-certificates && \
-    sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g; s|http://security.ubuntu.com/ubuntu|http://mirrors.aliyun.com/ubuntu|g' /etc/apt/sources.list && \
-    apt-get clean && \
-    apt-get update && \
-    apt-get install -y \
-        openssl libssl-dev freeradius freeradius-mysql \
-        python3 python3-pip mysql-server nano redis cron dos2unix && \
-    pip3 install cryptography redis -i https://mirrors.aliyun.com/pypi/simple/
 
 RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
     && mv /home/sql /etc/freeradius/3.0/mods-available/sql \
@@ -45,17 +33,18 @@ RUN echo "* * * * * /bin/bash /etc/freeradius/3.0/code/check_inactive.sh >> /var
     && dos2unix /etc/freeradius/3.0/code/check_inactive.sh \
     && dos2unix /etc/freeradius/3.0/code/token.sh \
     && chmod +x /etc/freeradius/3.0/code/token.sh \
-    && chmod +x /etc/freeradius/3.0/code/check_inactive.sh
+    && chmod +x /etc/freeradius/3.0/code/check_inactive.sh \
+    && dos2unix /home/startup.sh
 
 # 设置输出权限
 RUN mkdir -p /home/output \
     && chmod 777 /home/output/police.json || true \
     && touch /home/output/token.txt && chown freerad:freerad /home/output/token.txt && chmod 644 /home/output/token.txt
 
-# 启动 redis 和 cron
-RUN redis-server /etc/redis/redis.conf --daemonize yes \
-    && service cron start
+# 给启动脚本执行权限
+RUN chmod +x /home/startup.sh
 
-EXPOSE 1812 1813
+EXPOSE 1812/udp 1813/udp 3799/udp
 
-CMD ["freeradius", "-f", "-X"]
+# 使用你提供的启动脚本作为入口
+ENTRYPOINT ["/home/startup.sh"]

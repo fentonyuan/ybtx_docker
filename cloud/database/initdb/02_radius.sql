@@ -14,6 +14,7 @@
  Date: 23/06/2025 14:41:34
 */
 
+use radius;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 

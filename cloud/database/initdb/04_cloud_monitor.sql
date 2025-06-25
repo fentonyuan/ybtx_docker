@@ -14,6 +14,7 @@
  Date: 23/06/2025 14:40:44
 */
 
+use cloud_monitor;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
