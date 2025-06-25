@@ -29,14 +29,14 @@
     "commandFolderPath": "./command",
 
     "uploadRecord":{
-        "uploadInterval": 300000,
-        "freeDataBaseRecordInterval": 864000000,
+        "uploadRecordInterval": 60000,
+        "freeDataBaseRecordInterval": 86400000,
         "sendJsonPost": "http://10.1.160.101:8123/api/post/log"
     },
 
     "runtimeLog": {
         "isOutputLogAsFile": true,
-        "logFilePath": "./log/log.file",
-        "createNewLogFileInterval": 864000000
+        "logFileFolder": "./log",
+        "createNewLogFileInterval": 43200000
     }
 }
