@@ -1,20 +1,19 @@
 /*
- Navicat Premium Data Transfer
+ Navicat Premium Dump SQL
 
- Source Server         : localhost
+ Source Server         : 10.1.160.104
  Source Server Type    : MySQL
- Source Server Version : 80028
- Source Host           : localhost:3306
+ Source Server Version : 80039 (8.0.39)
+ Source Host           : 10.1.160.104:3306
  Source Schema         : mail
 
  Target Server Type    : MySQL
- Target Server Version : 80028
+ Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 01/06/2025 20:57:32
+ Date: 25/06/2025 14:04:26
 */
 
-use mail;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -23,16 +22,16 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `attachments`;
 CREATE TABLE `attachments`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT,
-  `originalFileName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `storedName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `fileSize` bigint(0) NULL DEFAULT NULL,
-  `fileType` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `uploadDate` datetime(0) NULL DEFAULT NULL,
-  `status` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `mailId` int(0) NULL DEFAULT NULL COMMENT '逻辑外键，关联邮件表的id',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `originalFileName` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `storedName` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `fileSize` bigint NULL DEFAULT NULL,
+  `fileType` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `uploadDate` datetime NULL DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `mailId` int NULL DEFAULT NULL COMMENT '逻辑外键，关联邮件表的id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 348 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 431 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of attachments
@@ -43,40 +42,21 @@ CREATE TABLE `attachments`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `mails`;
 CREATE TABLE `mails`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `fromUser` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `toUser` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `status` tinyint(0) NOT NULL DEFAULT 0 COMMENT '1 已发送邮件\r\n2 回收站邮件',
-  `createTime` datetime(0) NULL DEFAULT NULL,
-  `updateTime` datetime(0) NULL DEFAULT NULL,
-  `delflag` tinyint(0) NULL DEFAULT NULL COMMENT '0 未删除  1 已删除',
-  `hasAttach` int(0) NULL DEFAULT NULL COMMENT '附件数量',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `fromUser` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `toUser` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `content` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `status` tinyint NOT NULL DEFAULT 0 COMMENT '1 已发送邮件\r\n2 回收站邮件',
+  `createTime` datetime NULL DEFAULT NULL,
+  `updateTime` datetime NULL DEFAULT NULL,
+  `delflag` tinyint NULL DEFAULT NULL COMMENT '0 未删除  1 已删除',
+  `hasAttach` int NULL DEFAULT NULL COMMENT '附件数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 114011 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 114162 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mails
--- ----------------------------
-
--- ----------------------------
--- Table structure for operations
--- ----------------------------
-DROP TABLE IF EXISTS `operations`;
-CREATE TABLE `operations`  (
-  `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名也是邮箱',
-  `operation_time` datetime(0) NOT NULL COMMENT '行为发生时间',
-  `operation_type` int(0) NOT NULL COMMENT '0接收,1发送',
-  `data_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '数据类型',
-  `data_size` int(0) NOT NULL COMMENT '数据大小（字节）',
-  `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '记录创建时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户行为日志表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of operations
 -- ----------------------------
 
 -- ----------------------------
@@ -84,55 +64,49 @@ CREATE TABLE `operations`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `routers`;
 CREATE TABLE `routers`  (
-  `id` int(0) NOT NULL,
-  `email_suffix` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '@aa.com',
-  `short_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `gateway_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ID1',
+  `id` int NOT NULL,
+  `email_suffix` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '@aa.com',
+  `short_address` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `gateway_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT 'ID1',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of routers
 -- ----------------------------
+INSERT INTO `routers` VALUES (1, 'bb.com', 'VA:VEEFVD7RN27JGGWETLD55H6TJQNTNQE44L3WDT5RMESZIGSLUIDA', 'ID2');
+INSERT INTO `routers` VALUES (2, 'cc.com', 'VA:WTK3WZTFHSJUXMJCL3JYLCOVMZKNLBIHBKRJLTYEO3VMBXIZEZ7Q', 'ID3');
 
 -- ----------------------------
 -- Table structure for users
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `userStatus` int(0) NOT NULL DEFAULT 1,
-  `loginStatus` int(0) NOT NULL DEFAULT 0,
-  `createTime` datetime(0) NULL DEFAULT NULL,
-  `updateTime` datetime(0) NULL DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `userStatus` int NOT NULL DEFAULT 1,
+  `loginStatus` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `username`(`username` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 507 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'mail@aa.com', '123456', 1, 0, NULL, NULL);
-INSERT INTO `users` VALUES (2, 'user1@bb.com', 'abc@123', 1, 1, '2023-05-10 14:30:00', '2023-05-15 09:45:00');
-INSERT INTO `users` VALUES (3, 'test@cc.net', 'qwerty', 0, 0, '2023-06-20 10:15:00', NULL);
-INSERT INTO `users` VALUES (4, 'admin', '123456', 2, 1, '2023-01-01 00:00:00', '2023-07-22 18:20:00');
-INSERT INTO `users` VALUES (5, 'guest@ee.com', 'guest123', 1, 0, '2023-08-05 11:10:00', '2023-08-05 11:10:00');
 
 -- ----------------------------
 -- Table structure for users_login_log
 -- ----------------------------
 DROP TABLE IF EXISTS `users_login_log`;
 CREATE TABLE `users_login_log`  (
-  `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `user_id` int(0) NOT NULL,
-  `user_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `time` datetime(0) NOT NULL,
-  `type` tinyint(0) NOT NULL COMMENT '0: 登录, 1: 离线',
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `user_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `time` datetime NOT NULL,
+  `type` tinyint NOT NULL COMMENT '0: 登录, 1: 离线',
+  `remark` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 78 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 208 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users_login_log
