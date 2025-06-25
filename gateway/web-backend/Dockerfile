@@ -17,8 +17,8 @@ COPY mail-backend.jar app.jar
 COPY application.yml /app/application.yml
 
 RUN apt-get update && apt-get install -y fontconfig \
-&& mkdir /app/auth \
-&& chmod 777 ./auth/certification
+    && mkdir -p /app/auth/certification \
+    && chmod 777 /app/auth/certification
 
 # 认证配置
 COPY auth /app/auth

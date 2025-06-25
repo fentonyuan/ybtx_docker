@@ -1,22 +1,38 @@
 /*
- Navicat Premium Data Transfer
+ Navicat Premium Dump SQL
 
- Source Server         : docker-gate
+ Source Server         : 10.1.160.104
  Source Server Type    : MySQL
- Source Server Version : 80041
- Source Host           : 127.0.0.1:3308
+ Source Server Version : 80039 (8.0.39)
+ Source Host           : 10.1.160.104:3306
  Source Schema         : gateway_monitor
 
  Target Server Type    : MySQL
- Target Server Version : 80041
+ Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 01/06/2025 22:16:04
+ Date: 25/06/2025 14:03:43
 */
 
-use gateway_monitor;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for event
+-- ----------------------------
+DROP TABLE IF EXISTS `event`;
+CREATE TABLE `event`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `entity_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户id/设备id',
+  `entity_type` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户/设备',
+  `event_time` datetime NULL DEFAULT NULL,
+  `event_code` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '事件类型',
+  `event_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `superior_device_id` varbinary(255) NULL DEFAULT NULL,
+  `uploaded` tinyint(1) NULL DEFAULT 0,
+  `auth_method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 183 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user_operation
@@ -30,7 +46,8 @@ CREATE TABLE `user_operation`  (
   `data_size` double NULL DEFAULT NULL,
   `gateway_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `behavior_time` datetime NULL DEFAULT NULL,
+  `uploaded` tinyint(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1706 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1762 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 SET FOREIGN_KEY_CHECKS = 1;
