@@ -37,10 +37,8 @@ RUN echo "* * * * * /bin/bash /etc/freeradius/3.0/code/check_inactive.sh >> /var
 
 # 设置输出权限
 RUN mkdir -p /home/output \
-    && touch /home/output/police.json /home/output/token.txt \
-    && chown freerad:freerad /home/output/police.json /home/output/token.txt \
-    && chmod 777 /home/output/police.json \
-    && chmod 777 /home/output/token.txt
+    && chmod 777 /home/output/police.json || true \
+    && touch /home/output/token.txt && chown freerad:freerad /home/output/token.txt && chmod 644 /home/output/token.txt
 
 # 给启动脚本执行权限
 RUN chmod +x /home/startup.sh
