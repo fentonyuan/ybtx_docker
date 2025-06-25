@@ -13,9 +13,7 @@ RUN mv /home/clients.conf /etc/freeradius/3.0/clients.conf \
     && mv /home/exec /etc/freeradius/3.0/mods-enabled/exec \
     && mv /home/queries.conf /etc/freeradius/3.0/mods-config/sql/main/mysql/queries.conf \
     && mv -T /home/code /etc/freeradius/3.0/code \
-    && mv -T /home/keys /etc/freeradius/3.0/keys \
-    && service redis-server start \
-    && systemctl start redis
+    && mv -T /home/keys /etc/freeradius/3.0/keys
 
 WORKDIR /etc/freeradius/3.0/certs
 
@@ -25,7 +23,6 @@ RUN chown freerad:freerad /etc/freeradius/3.0/certs/dh \
     && chmod 640 /etc/freeradius/3.0/certs/ca.pem \
     && chown root:freerad /etc/freeradius/3.0/certs/ca.pem \
     && ln -s /etc/freeradius/3.0/sites-available/coa /etc/freeradius/3.0/sites-enabled/ \
-    && service redis-server start \
     && chmod 777 /home/output/police.json \
     && chmod +x /etc/freeradius/3.0/code/check_inactive.sh \
     && dos2unix /home/startup.sh
