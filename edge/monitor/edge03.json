@@ -10,15 +10,14 @@
     },
 
     "runtimeLog": {
-        "isOutputLogAsFile": false,
-        "logFilePath": "./log/log.file",
+        "isOutputLogAsFile": true,
+        "logFileFolder": "./log",
         "createNewLogFileInterval": 864000000
     },
 
     "uploadRecord":{
-        "uploadInitDelay": 3000000,
-        "uploadInterval": 300000,
-        "freeDataBaseRecordInterval": 864000000
+        "uploadRecordInterval": 60000,
+        "freeDataBaseRecordInterval": 86400000
     },
 
     "datasets":{
