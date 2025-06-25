@@ -55,6 +55,8 @@
         "key": "./auth/000000000002.key",
         "keypass": "",
 
-        "exePath": "./auth/certification"
+        "exePath": "./auth/certification",
+        "isOpen": true,
+        "defaultDownDeviceAddress": "127.0.0.1"
     }
 }
