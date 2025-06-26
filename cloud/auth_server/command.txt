@@ -3,3 +3,17 @@ docker run -d -p 1812:1812 -p 1813:1813 --name cloud-auth-server --net localNet 
 docker exec -it cloud-auth-server /bin/bash
 
 docker run -d --name cloud-auth-server --network host cloud-auth-server
+
+base镜像名：
+构建命令:
+运行命令（靶场环境）：
+运行命令（三十所环境）：
+开放端口说明：
+    -端口 1 ：靶场内为xxx，三十所内为xxx，用于xxx
+    -端口 2 ：
+    ......
+配置项说明：
+    数据库修改位置....
+    后端请求修改位置...
+    卷挂载位置...(如果需要与其他容器共享，需要强调说明)
+其他说明项：
