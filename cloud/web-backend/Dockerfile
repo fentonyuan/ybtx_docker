@@ -1,26 +1,32 @@
-FROM ubuntu:22.04
+FROM cloud-web-base:latest
+
 
 ENV DEBIAN_FRONTEND=noninteractive
+# 设置时区为东八区
+ENV TZ=Asia/Shanghai
 
 COPY ./gin-server /home/gin-server
 COPY ./config/sources.list /home/sources.list
-
-#RUN mv /home/sources.list /etc/apt/sources.list && \
-#   apt-get update && \
-#    apt-get install -y ca-certificates
+COPY ./debug_config_gen.sh /home/debug_config_gen.sh
+COPY ./container_init.sh /home/container_init.sh
+# 复制 AES 密钥文件用于日志上传加密
+COPY ./keys/key.bin /home/keys/key.bin
 
 WORKDIR /home
 
-# 创建必要的目录
-RUN mkdir -p logs regist/certs/certs regist/certs/keys /home/gateway_config
+# 创建必要的目录并设置权限
+RUN mkdir -p /home/logs regist/certs/certs regist/certs/keys /home/gateway_config /home/keys && \
+    chmod -R 755 /home/logs regist /home/gateway_config /home/keys && \
+    chmod 600 /home/keys/key.bin
 
 # 设置环境变量
 # ===== 基本配置 =====
 ENV SERVER_HOST=0.0.0.0                
 ENV SERVER_PORT=8123                   
-ENV DEBUG_LEVEL=false                   
-ENV DEBUG=false                        
-ENV TEST_MODE=false                     
+ENV DEBUG_LEVEL=true                   
+ENV DEBUG=true                        
+ENV TEST_MODE=false
+ENV SKIP_TLS_VERIFY=true                
 
 # ===== 跨域资源配置 =====
 ENV CORS_ENABLED=true                  
@@ -92,24 +98,26 @@ ENV FTP_USERNAME=
 ENV FTP_PASSWORD=                       
 
 # ===== 日志模块配置 =====
-ENV LOG_MODULE_ENABLED=true            
-ENV LOG_LEVEL=info                      
-ENV LOG_ENABLE_CONSOLE_OUTPUT=true      
-ENV LOG_ENABLE_FILE_OUTPUT=true         
-ENV LOG_FILE_PATH=logs/server.log      
-ENV LOG_MAX_FILE_SIZE=10                
-ENV LOG_MAX_BACKUP_COUNT=5              
+ENV LOG_MODULE_ENABLED=true
+ENV LOG_LEVEL=info
+ENV LOG_ENABLE_CONSOLE_OUTPUT=true
+ENV LOG_ENABLE_FILE_OUTPUT=true
+ENV LOG_FILE_PATH=/home/logs/server.log
+ENV LOG_MAX_FILE_SIZE=10
+ENV LOG_MAX_BACKUP_COUNT=5
 
 # 日志管理配置
-ENV LOG_ENABLED=true                   
-ENV LOG_GENERATE_INTERVAL=10            
-ENV LOG_ENABLE_ENCRYPTION=false         
-ENV LOG_ENABLE_MOCK_GENERATION=true     
-ENV LOG_DIR=logs                        
-ENV LOG_UPLOAD_DIR=log                  
-ENV LOG_REMOTE_PATH=log                 
-ENV LOG_PACKAGE_TYPE=json               
-ENV LOG_AES_KEY_PATH=keys/configmanager/log/aes_test_key.bin 
+ENV LOG_ENABLED=true
+ENV LOG_GENERATE_INTERVAL=10
+# 启用 AES 加密功能用于日志上传
+ENV LOG_ENABLE_ENCRYPTION=true
+ENV LOG_ENABLE_MOCK_GENERATION=false
+ENV LOG_DIR=/home/logs
+ENV LOG_UPLOAD_DIR=log
+ENV LOG_REMOTE_PATH=log
+ENV LOG_PACKAGE_TYPE=json
+# AES 密钥文件路径（用于日志上传加密）
+ENV LOG_AES_KEY_PATH=/home/keys/key.bin
 
 # ===== 证书管理模块配置 =====
 ENV CERT_MODULE_ENABLED=true            
@@ -128,7 +136,7 @@ ENV COMPRESS_BUFFER_SIZE=32768
 
 # 配置文件管理配置
 ENV CONFIG_FILE_ENABLED=true           
-ENV CONFIG_FILE_POLL_INTERVAL=300       
+ENV CONFIG_FILE_POLL_INTERVAL=15       
 ENV CONFIG_FILE_DOWNLOAD_DIR=configmanager/config_exec/downloads 
 ENV CONFIG_FILE_REMOTE_PATH=config     
 ENV CONFIG_FILE_TEST_DIR=test           
@@ -147,7 +155,7 @@ ENV CONFIG_GEN_POLL_INTERVAL=30
 ENV CONFIG_GEN_ENABLE_ENCRYPTION=false  
 
 # ===== 测试数据配置 =====
-ENV TEST_ENABLE_INITIAL_DATA=true       
+ENV TEST_ENABLE_INITIAL_DATA=false       
 ENV TEST_ENABLE_REALTIME_DATA=false     
 ENV TEST_DEVICE_COUNT=10               
 ENV TEST_USERS_PER_DEVICE=5             
@@ -174,7 +182,7 @@ ENV USER_ENABLE_CONNECTIONS=true
 ENV USER_MAX_CONNECTIONS_PER_USER=50    
 
 # ===== 调试日志配置 =====
-ENV DEBUG_LEVEL_DATABASE=3              
+ENV DEBUG_LEVEL_DATABASE=0              
 ENV DEBUG_LEVEL_AUTH=3                  
 ENV DEBUG_LEVEL_CERT=3                   
 ENV DEBUG_LEVEL_CONFIG_EXEC=3            
@@ -183,8 +191,18 @@ ENV DEBUG_LEVEL_LOG=3
 ENV DEBUG_LEVEL_DEVICE=3                 
 ENV DEBUG_LEVEL_USER=3
 
+# 声明挂载点
+VOLUME ["/home/logs"]
+
 # 暴露端口
 EXPOSE 8123
 
+# 设置文件权限
+RUN chmod +x /home/gin-server /home/debug_config_gen.sh /home/container_init.sh && \
+    # 验证文件存在性
+    ls -la /home/gin-server /home/debug_config_gen.sh /home/container_init.sh && \
+    # 确保脚本具有正确的行结束符
+    sed -i 's/\r$//' /home/container_init.sh /home/debug_config_gen.sh
+
 # 运行应用
-CMD ["./gin-server"] 
+CMD ["/home/container_init.sh"]

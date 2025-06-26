@@ -1,0 +1,13 @@
+# 忽略所有令牌文件，防止敏感信息泄露
+*_token
+*.token
+*.key
+
+# 但保留说明文件
+!README.md
+!.gitignore
+
+# 忽略临时文件
+*.tmp
+*.bak
+*~

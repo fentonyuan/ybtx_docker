@@ -1,0 +1,7 @@
+docker load -i cloud-web-backend_base.tar
+
+docker build -t cloud-web-backend:latest .
+
+#linux下运行
+docker run -d -p 8123:8123 --name cloud-web-backend:latest \
+--net localNet --ip 192.168.0.5 cloud-web-backend:latest
