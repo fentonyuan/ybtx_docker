@@ -37,9 +37,9 @@
         "nas-ip-address":"10.1.160.105",
         "dictionary_path": "./auth/radius_dictionary",
         "public_key_path": "./auth/public_key.pem",
-        "auth-port": 1812,
-        "acct-port": 1813,
-        "coa-port": 3799,
+        "auth_port": 1812,
+        "acct_port": 1813,
+        "coa_port": 3799,
 
         "method": "certificate",
         "username": "ID2",
@@ -49,7 +49,8 @@
         "key": "./auth/ID2.key",
         "keypass": "",
         "exePath": "./auth/certification",
-        "configFile": "./auth/config.json"
+        "isOpen": true,
+        "enableAuthLog":false
     },
 
     "runtimeLog": {

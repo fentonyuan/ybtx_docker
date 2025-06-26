@@ -29,7 +29,7 @@
     },
 
     "auth": {
-        "radius-server" : "10.1.160.102",
+        "radius-server" : "192.168.0.3",
         "radius-secret" : "testing123",
         "ca-cert" : "/home/pcl/gateway/monitor/auth/ca.pem",
         "client_cert": "",
@@ -37,9 +37,9 @@
         "nas-ip-address":"10.1.160.104",
         "dictionary_path": "/home/pcl/gateway/monitor/auth/radius_dictionary",
         "public_key_path": "/home/pcl/gateway/monitor/auth/public_key.pem",
-        "auth-port": 1812,
-        "acct-port": 1813,
-        "coa-port": 3799,
+        "auth_port": 1812,
+        "acct_port": 1813,
+        "coa_port": 3799,
 
         "method": "certificate",
         "username": "ID1",
@@ -48,7 +48,9 @@
         "cert": "/home/pcl/gateway/monitor/auth/ID1.crt",
         "key": "/home/pcl/gateway/monitor/auth/ID1.key",
         "keypass": "",
-        "exePath": "/home/pcl/gateway/monitor/auth/certification"
+        "exePath": "/home/pcl/gateway/monitor/auth/certification",
+        "isOpen": true,
+        "enableAuthLog":false
     },
 
     "runtimeLog": {
