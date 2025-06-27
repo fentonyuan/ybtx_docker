@@ -1,14 +1,20 @@
-docker build -t cloud-monitor .
-
-#设置命令下发文件夹 设置日志报错文件夹 日志文件
-docker run -d --name cloud-monitor  \
--p 9090:9090 -v /home/pcl/log:/app/log \
--v /home/pcl/command:/app/command \
--v /home/pcl/cloud_report:/app/cloud_report \
---net localNet --ip 192.168.0.4 cloud-monitor
-
-docker run -it --name cloud-monitor  \
--p 9090:9090 -v /home/pcl/log:/app/log \
--v /home/pcl/command:/app/command \
--v /home/pcl/cloud_report:/app/cloud_report \
---net localNet --ip 192.168.0.4 cloud-monitor /bin/bash
+base镜像名：cloud-monitor
+构建命令: docker build -t cloud-monitor .
+运行命令（靶场环境）：docker run -d --name cloud-monitor  \
+           -p 9090:9090 -v /home/pcl/log:/app/log \
+           -v /home/pcl/command:/app/command \
+           -v /home/pcl/cloud_report:/app/cloud_report \
+           --net localNet --ip 192.168.0.4 cloud-monitor
+运行命令（三十所环境）：
+开放端口说明：
+    -端口 1 ：靶场内为9090
+    -端口 2 ：
+    ......
+配置项说明：
+    数据库修改位置：cloud.json配置文件里面修改
+    后端请求修改位置...
+    卷挂载位置...(如果需要与其他容器共享，需要强调说明)
+    /home/pcl/log:/app/log    挂载日志
+    /home/pcl/command:/app/command  接收下发的增量更新命令，需与 web_backend 容器共享目录
+    /home/pcl/cloud_report:/app/cloud_report  记录云端日志上传
+其他说明项：
