@@ -1,2 +1,13 @@
-docker build -t cloud-database .
-docker run -d -p 3306:3306 --name cloud-database --net localNet --ip 192.168.0.2 cloud-database
+base镜像名：cloud-database
+构建命令: docker build -t cloud-database .
+运行命令（靶场环境）：docker run -d -p 3306:3306 --name cloud-database --net localNet --ip 192.168.0.2 cloud-database
+运行命令（三十所环境）：
+开放端口说明：
+    -端口 1 ：靶场内为3306，数据库开放端口
+    -端口 2 ：
+    ......
+配置项说明：
+    数据库修改位置：
+    后端请求修改位置...
+    卷挂载位置...(如果需要与其他容器共享，需要强调说明)
+其他说明项：

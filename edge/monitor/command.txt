@@ -1,13 +1,15 @@
-docker build -t edge-monitor .
-
-#设置命令下发文件夹 设置日志报错文件夹 日志文件
-docker run -d --name edge-monitor  \
--p 9091:9091 -v /home/pcl/log:/app/log \
---net localNet --ip 192.168.0.4 edge-monitor
-
-docker run -it --name edge-monitor  \
--p 9091:9090 -v /home/pcl/log:/app/log /bin/bash
-
-docker run -d --name edge-monitor -p 9091:9091 -v /home/pcl/log:/app/log edge-monitor
-
-docker run -d --name edge-monitor -p 9091:9091 -v /home/pcl/log:/app/log -v /home/pcl/output:/app/output --net localNet --ip 192.168.0.4 edge-monitor
+base镜像名：edge-monitor
+构建命令: docker build -t edge-monitor .
+运行命令（靶场环境）：docker run -d --name edge-monitor -p 9091:9091 -v /home/pcl/log:/app/log -v /home/pcl/output:/app/output --net localNet --ip 192.168.0.4 edge-monitor
+运行命令（三十所环境）：
+开放端口说明：
+    -端口 1 ：靶场内为9091
+    -端口 2 ：
+    ......
+配置项说明：
+    数据库修改位置：edge.json配置文件里面修改
+    后端请求修改位置...
+    卷挂载位置...(如果需要与其他容器共享，需要强调说明)
+    /home/pcl/log:/app/log  挂载日志
+    /home/pcl/output:/app/output  与edge-auth-server认证服务端镜像共享目录
+其他说明项：
