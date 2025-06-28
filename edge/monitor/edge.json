@@ -43,9 +43,9 @@
         "nas-ip-address":"10.1.160.102",
         "dictionary_path": "./auth/radius_dictionary",
         "public_key_path": "./auth/public_key.pem",
-        "auth-port": 1812,
-        "acct-port": 1813,
-        "coa-port": 3799,
+        "auth_port": 1812,
+        "acct_port": 1813,
+        "coa_port": 3799,
 
         "method": "certificate",
         "username": "000000000001",
@@ -54,9 +54,9 @@
         "cert": "./auth/000000000001.crt",
         "key": "./auth/000000000001.key",
         "keypass": "",
-
-        "exePath": "./auth/certification",
         "isOpen": true,
-        "defaultDownDeviceAddress": "127.0.0.1"
+        "enableAuthLog":false,
+        "defaultDownDeviceAddress": "127.0.0.1",
+        "exePath": "./auth/certification"
     }
 }
