@@ -1,13 +1,8 @@
-docker build -t gateway-web-backend .
+#加载基础镜像
+docker load -i gateway-web-backend.tar
 
-/*
- gateway-web-backend运行语句
- application.yml配置文件也需要进行更改
- 添加了容器挂载功能
-*/
-docker run -d --name gateway-web-backend \
-  -p 8080:8080 \
-  --net localNet --ip 192.168.0.5 \
-  -v /home/pcl/gateway/monitor/file_buffer:/app/file_buffer \
-  gateway-web-backend
+#Dockerfile中根据基础镜像构建最终可执行镜像
+docker build --pull=false -t gateway-web-backend:latest -f Dockerfile .
 
+#运行镜像语句
+docker run -d --name gateway-web-backend --net gatewayNet -p 8080:8080 -v /home/pcl/gateway/monitor/file_buffer:/app/file_buffer gateway-web-backend
