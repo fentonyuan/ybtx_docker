@@ -3,7 +3,7 @@ spring:
     name: mail
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.0.2:3306/mail
+    url: jdbc:mysql://gateway-database:3306/mail
     username: root
     password: 123456
   servlet:
@@ -12,6 +12,8 @@ spring:
       max-file-size: 1024MB
       #单个请求最大文件大小
       max-request-size: 10240MB
+server:
+  port: 8080
 
 mybatis:
   configuration:
@@ -39,20 +41,22 @@ file:
 
 # 与monitor集成的代码
 monitor:
-  monitor-host: 10.1.160.105
+  monitor-host: host.docker.internal
   monitor-port: 9092
 
 # 集成校验授权
 auth:
-  radius-server: 10.1.160.105
+  radius-server: gateway-auth-server
   radius-secret: testing123
   ca-cert: ./auth/ca.pem
   client-cert: ""
   client-key: ""
-  nas-ip-address: 127.0.0.1
+  nas-ip-address: 192.168.0.5
   dictionary-path: ./auth/radius_dictionary
   public-key-path: ./auth/public_key.pem
-
+  auth_port: 1812
+  acct_port: 1813
+  coa_port: 3799
   method: password
   username:
   password:

@@ -1,5 +1,27 @@
-#加载镜像
+base镜像名：gateway-database
+构建命令: 
 docker load -i gateway-database.tar
 
-# 启动容器  3307是映射的宿主机端口，如果出现端口冲突，可以更换端口
+运行命令（靶场环境）：
 docker run -d --name gateway-database --net gatewayNet -p 3307:3306 gateway-database
+
+运行命令（三十所环境）：
+docker run -d --name gateway-database --net gatewayNet -p 3307:3306 gateway-database
+
+开放端口说明：
+    -端口 1 ：3307端口为宿主机端口，开放端口避免宿主机上端口占用冲突
+    -端口 2 ：
+    ......
+配置项说明：
+    数据库修改位置：
+    后端请求修改位置...
+    卷挂载位置...(如果需要与其他容器共享，需要强调说明)
+其他说明项：
+    #构建顺序 需要按照顺序构建
+    gateway-database
+    gateway-web-backed
+    gateway-web-fronted
+    gateway-auth-server
+
+    #monitor 由于奇安信通道的原因 因此只能采用 java -jar ybtx_monitor.jar & d 方式运行，无法构建镜像
+    gateway-monitor
