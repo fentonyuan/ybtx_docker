@@ -1,0 +1,103 @@
+{
+    "launchMode": "gateMode",
+    "deviceId": "ID2",
+
+    "monitorCommunication": {
+        "innerReceivePort": 9092,
+        "upstreamDeviceHost": "10.1.160.103",
+        "upstreamDevicePort": 9091
+    },
+
+    "datasets": {
+        "recordDatabaseUser": "root",
+        "recordDatabasePassword": "123456",
+        "recordDatabaseHost": "gateway-database",
+        "recordDatabasePort": 3306,
+        "recordDatabaseName": "gateway_monitor",
+
+        "mailDatabaseUser": "root",
+        "mailDatabasePassword": "123456",
+        "mailDatabaseHost": "gateway-database",
+        "mailDatabasePort": 3306,
+        "mailDatabaseName": "mail",
+
+        "radiusDatabaseUser": "root",
+        "radiusDatabasePassword": "123456",
+        "radiusDatabaseHost": "gateway-database",
+        "radiusDatabasePort": 3306,
+        "radiusDatabaseName": "radius"
+    },
+
+    "auth": {
+        "radius-server" : "10.1.160.103",
+        "radius-secret" : "testing123",
+        "ca-cert" : "./auth/ca.pem",
+        "client_cert": "",
+        "client_key": "",
+        "nas-ip-address":"10.1.160.105",
+        "dictionary_path": "./auth/radius_dictionary",
+        "public_key_path": "./auth/public_key.pem",
+
+        "method": "certificate",
+        "username": "ID2",
+        "password": "deviceP@SSWD!",
+        "mac": "1111",
+        "cert": "./auth/ID2.crt",
+        "key": "./auth/ID2.key",
+        "keypass": "",
+        "exePath": "./auth/certification",
+        "configFile": "./auth/config.json",
+        "isOpen": true,
+        "enableAuthLog":true,
+        "defaultDownDeviceAddress": "127.0.0.1"
+    },
+
+    "runtimeLog": {
+        "isOutputLogAsFile": true,
+        "logFileFolder": "./log",
+        "createNewLogFileInterval": 864000000
+    },
+
+    "uploadRecord":{
+        "uploadInitDelay": 60000,
+        "uploadRecordInterval": 300000,
+        "freeDataBaseRecordInterval": 864000000
+    },
+
+    "gateway": {
+        "id": "ID2",
+        "email-suffix": "bb.com",
+        "terminalIp": "127.0.0.1",
+        "shortAddress": "VA:VEEFVD7RN27JGGWETLD55H6TJQNTNQE44L3WDT5RMESZIGSLUIDA",
+        "longAddress": "STT74H3T2TPMD33INCCDTUD57OHHUIVAZW2ZT6NEG545BOFE64W2SCC2R7YW5PUTDLCJVR66T7JUYGZWYCOOF53BZ6YWCJMUDJF2EBQ",
+        "sendPort": 12222,
+        "receivePort": 23333,
+        "loggerPath": "./log",
+        "accesses": [
+            "VA:LIXKFVXVVYEXWEGMGDCYGN5RAQSDLDR2YOQDPYUI6TKVAIWBWRLA=139.129.37.221:20620",
+            "VA:YYFYDQRYNANVYALKBZEJ2YDLN7ZI6UJGCCKWW6JVYVTP2DTHWUDQ=47.104.82.65:22249"
+        ],
+        "outlets": [
+            "VA:M5JCZHHZV7MQAKHXWAYMHZQA4WS23DELKG4T2PM2WAVIOOLI6WMA",
+            "VA:NSJZX3FNJ7WMZREFTPBWZKIMX5RDFBXLR7NNO5RUB6ODGNFHMIYA"
+        ]
+    },
+
+    "file": {
+        "send-dir": "./file_buffer/sender_buffer",
+        "receive-dir": "./file_buffer/receiver_buffer",
+        "upload-dir": "./file_buffer",
+        "aes-key": "zSbcY8W5CVqtUNtZ2UB8zA==",
+        "security-dir": "./file_buffer/security_store"
+    },
+
+    "secretkey": {
+        "receiver-material-dir": "./gateway_dependency/secretkey/ID2",
+        "receiver-material-path": "./gateway_dependency/secretkey/ID2/neg_info.bin",
+        "sender-material-dir": "./gateway_dependency/secretkey/ID2",
+        "sender-material-path": "./gateway_dependency/secretkey/ID2/neg_info.bin",
+        "creator-path": "./gateway_dependency/liunx/creator.bin",
+        "sender-path": "./gateway_dependency/liunx/sender.bin",
+        "receiver-path": "./gateway_dependency/liunx/receiver.bin"
+    }
+}

@@ -11,35 +11,32 @@
     "datasets": {
         "recordDatabaseUser": "root",
         "recordDatabasePassword": "123456",
-        "recordDatabaseHost": "192.168.0.2",
+        "recordDatabaseHost": "gateway-database",
         "recordDatabasePort": 3306,
         "recordDatabaseName": "gateway_monitor",
 
         "mailDatabaseUser": "root",
         "mailDatabasePassword": "123456",
-        "mailDatabaseHost": "192.168.0.2",
+        "mailDatabaseHost": "gateway-database",
         "mailDatabasePort": 3306,
         "mailDatabaseName": "mail",
 
         "radiusDatabaseUser": "root",
         "radiusDatabasePassword": "123456",
-        "radiusDatabaseHost": "192.168.0.2",
+        "radiusDatabaseHost": "gateway-database",
         "radiusDatabasePort": 3306,
         "radiusDatabaseName": "radius"
     },
 
     "auth": {
-        "radius-server" : "192.168.0.3",
+        "radius-server" : "10.1.160.102",
         "radius-secret" : "testing123",
         "ca-cert" : "/home/pcl/gateway/monitor/auth/ca.pem",
         "client_cert": "",
-        "client_key": "",
-        "nas-ip-address":"10.1.160.104",
+        "client_key": "",  
+        "nas-ip-address":"10.1.160.104", 
         "dictionary_path": "/home/pcl/gateway/monitor/auth/radius_dictionary",
         "public_key_path": "/home/pcl/gateway/monitor/auth/public_key.pem",
-        "auth_port": 1812,
-        "acct_port": 1813,
-        "coa_port": 3799,
 
         "method": "certificate",
         "username": "ID1",
@@ -49,8 +46,10 @@
         "key": "/home/pcl/gateway/monitor/auth/ID1.key",
         "keypass": "",
         "exePath": "/home/pcl/gateway/monitor/auth/certification",
+        
         "isOpen": true,
-        "enableAuthLog":false
+        "enableAuthLog":true,
+        "defaultDownDeviceAddress": "127.0.0.1"
     },
 
     "runtimeLog": {
@@ -100,3 +99,4 @@
         "receiver-path": "./gateway_dependency/liunx/receiver.bin"
     }
 }
+

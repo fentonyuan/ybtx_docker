@@ -1,0 +1,103 @@
+{
+    "launchMode": "gateMode",
+    "deviceId": "ID1",
+
+    "monitorCommunication": {
+        "innerReceivePort": 9092,
+        "upstreamDeviceHost": "10.1.160.102",
+        "upstreamDevicePort": 9091
+    },
+
+    "datasets": {
+        "recordDatabaseUser": "root",
+        "recordDatabasePassword": "123456",
+        "recordDatabaseHost": "gateway-database",
+        "recordDatabasePort": 3306,
+        "recordDatabaseName": "gateway_monitor",
+
+        "mailDatabaseUser": "root",
+        "mailDatabasePassword": "123456",
+        "mailDatabaseHost": "gateway-database",
+        "mailDatabasePort": 3306,
+        "mailDatabaseName": "mail",
+
+        "radiusDatabaseUser": "root",
+        "radiusDatabasePassword": "123456",
+        "radiusDatabaseHost": "gateway-database",
+        "radiusDatabasePort": 3306,
+        "radiusDatabaseName": "radius"
+    },
+
+    "auth": {
+        "radius-server" : "192.168.0.3",
+        "radius-secret" : "testing123",
+        "ca-cert" : "/home/pcl/gateway/monitor/auth/ca.pem",
+        "client_cert": "",
+        "client_key": "",
+        "nas-ip-address":"10.1.160.104",
+        "dictionary_path": "/home/pcl/gateway/monitor/auth/radius_dictionary",
+        "public_key_path": "/home/pcl/gateway/monitor/auth/public_key.pem",
+        "auth_port": 1812,
+        "acct_port": 1813,
+        "coa_port": 3799,
+
+        "method": "certificate",
+        "username": "ID1",
+        "password": "deviceP@SSWD!",
+        "mac": "1111",
+        "cert": "/home/pcl/gateway/monitor/auth/ID1.crt",
+        "key": "/home/pcl/gateway/monitor/auth/ID1.key",
+        "keypass": "",
+        "exePath": "/home/pcl/gateway/monitor/auth/certification",
+        "isOpen": true,
+        "enableAuthLog":false,
+        "defaultDownDeviceAddress": "127.0.0.1"
+    },
+
+    "runtimeLog": {
+        "isOutputLogAsFile": true,
+        "logFileFolder": "./log",
+        "createNewLogFileInterval": 864000000
+    },
+    "uploadRecord":{
+        "uploadInitDelay": 60000,
+        "uploadRecordInterval": 60000,
+        "freeDataBaseRecordInterval": 864000000
+    },
+
+    "gateway": {
+        "id": "ID1",
+        "email-suffix": "aa.com",
+        "terminalIp": "127.0.0.1",
+        "shortAddress": "VA:WZ2IATPGEZCHRAPTSKI4VWBN5YNKWQY5MCOZRA7OVKUEHRCCYTZA",
+        "longAddress": "A6BDN5YF6HWEG3N3YFZOBS4IYA75SCPYRS34SVS42K2KROV6DWA3M5EAJXTCMRDYQHZZFEOK3AW64GVLIMOWBHMYQPXKVKCDYRBMJ4Q",
+        "sendPort": 12222,
+        "receivePort": 23333,
+        "loggerPath": "./log/",
+        "accesses": [
+                "VA:LIXKFVXVVYEXWEGMGDCYGN5RAQSDLDR2YOQDPYUI6TKVAIWBWRLA=139.129.37.221:20620",
+                "VA:YYFYDQRYNANVYALKBZEJ2YDLN7ZI6UJGCCKWW6JVYVTP2DTHWUDQ=47.104.82.65:22249"
+        ],
+        "outlets": [
+                "VA:M5JCZHHZV7MQAKHXWAYMHZQA4WS23DELKG4T2PM2WAVIOOLI6WMA",
+                "VA:NSJZX3FNJ7WMZREFTPBWZKIMX5RDFBXLR7NNO5RUB6ODGNFHMIYA"
+        ]
+    },
+    "file": {
+        "send-dir": "./file_buffer/sender_buffer",
+        "receive-dir": "./file_buffer/receiver_buffer",
+        "upload-dir": "./file_buffer",
+        "aes-key": "zSbcY8W5CVqtUNtZ2UB8zA==",
+        "security-dir": "./file_buffer/security_store"
+    },
+
+    "secretkey": {
+        "receiver-material-dir": "./gateway_dependency/secretkey/ID1",
+        "receiver-material-path": "./gateway_dependency/secretkey/ID1/neg_info.bin",
+        "sender-material-dir": "./gateway_dependency/secretkey/ID1",
+        "sender-material-path": "./gateway_dependency/secretkey/ID1/neg_info.bin",
+        "creator-path": "./gateway_dependency/liunx/creator.bin",
+        "sender-path": "./gateway_dependency/liunx/sender.bin",
+        "receiver-path": "./gateway_dependency/liunx/receiver.bin"
+    }
+}

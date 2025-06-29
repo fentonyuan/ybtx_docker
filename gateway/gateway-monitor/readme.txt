@@ -1,0 +1,7 @@
+由于通道的特殊性，因此gateway_monitor无法构建为容器
+且因为宿主机为windows、Liunx不同，对于通道的jar包与密钥协商的调用参数也会存在影响。
+
+Liunx下配置文件为config.json、config_05.json。Jar包为ybtx_monitor.jar
+Windows下配置文件为:config_windows.json、config_windows_05.json。 Jar包为ybtx_monitor_windows.jar
+
+其余参考command命令
