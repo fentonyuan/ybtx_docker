@@ -1,0 +1,13 @@
+docker build -t gateway-web-backend .
+
+/*
+ gateway-web-backend运行语句
+ application.yml配置文件也需要进行更改
+ 添加了容器挂载功能
+*/
+docker run -d --name gateway-web-backend \
+  -p 8080:8080 \
+  --net localNet --ip 192.168.0.5 \
+  -v /home/pcl/gateway/monitor/file_buffer:/app/file_buffer \
+  gateway-web-backend
+
