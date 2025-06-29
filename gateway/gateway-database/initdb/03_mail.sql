@@ -1,22 +1,22 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : 10.1.160.104
+ Source Server         : 10.1.160.105
  Source Server Type    : MySQL
  Source Server Version : 80039 (8.0.39)
- Source Host           : 10.1.160.104:3306
+ Source Host           : 10.1.160.105:3306
  Source Schema         : mail
 
  Target Server Type    : MySQL
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 25/06/2025 14:04:26
+ Date: 25/06/2025 13:29:21
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
+USE mail;
 -- ----------------------------
 -- Table structure for attachments
 -- ----------------------------
@@ -31,7 +31,7 @@ CREATE TABLE `attachments`  (
   `status` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `mailId` int NULL DEFAULT NULL COMMENT '逻辑外键，关联邮件表的id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 431 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 413 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of attachments
@@ -53,7 +53,7 @@ CREATE TABLE `mails`  (
   `delflag` tinyint NULL DEFAULT NULL COMMENT '0 未删除  1 已删除',
   `hasAttach` int NULL DEFAULT NULL COMMENT '附件数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 114162 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 114103 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mails
@@ -74,7 +74,7 @@ CREATE TABLE `routers`  (
 -- ----------------------------
 -- Records of routers
 -- ----------------------------
-INSERT INTO `routers` VALUES (1, 'bb.com', 'VA:VEEFVD7RN27JGGWETLD55H6TJQNTNQE44L3WDT5RMESZIGSLUIDA', 'ID2');
+INSERT INTO `routers` VALUES (1, 'aa.com', 'VA:WZ2IATPGEZCHRAPTSKI4VWBN5YNKWQY5MCOZRA7OVKUEHRCCYTZA', 'ID1');
 INSERT INTO `routers` VALUES (2, 'cc.com', 'VA:WTK3WZTFHSJUXMJCL3JYLCOVMZKNLBIHBKRJLTYEO3VMBXIZEZ7Q', 'ID3');
 
 -- ----------------------------
@@ -88,7 +88,7 @@ CREATE TABLE `users`  (
   `loginStatus` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 507 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 127 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
@@ -106,7 +106,7 @@ CREATE TABLE `users_login_log`  (
   `type` tinyint NOT NULL COMMENT '0: 登录, 1: 离线',
   `remark` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 208 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 167 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users_login_log

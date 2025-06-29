@@ -11,12 +11,12 @@
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 25/06/2025 14:04:36
+ Date: 25/06/2025 17:57:07
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
+USE radius;
 -- ----------------------------
 -- Table structure for nas
 -- ----------------------------

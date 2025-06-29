@@ -1,2 +1,5 @@
-docker build -t gateway-database .
-docker run -d -p 3306:3306 --name gateway-database --net localNet --ip 192.168.0.2 gateway-database
+#加载镜像
+docker load -i gateway-database.tar
+
+# 启动容器  3307是映射的宿主机端口，如果出现端口冲突，可以更换端口
+docker run -d --name gateway-database --net gatewayNet -p 3307:3306 gateway-database
