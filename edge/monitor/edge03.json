@@ -54,9 +54,9 @@
         "cert": "./auth/000000000002.crt",
         "key": "./auth/000000000002.key",
         "keypass": "",
-
-        "exePath": "./auth/certification",
         "isOpen": true,
-        "defaultDownDeviceAddress": "127.0.0.1"
+        "enableAuthLog":false,
+        "defaultDownDeviceAddress": "127.0.0.1",
+        "exePath": "./auth/certification"
     }
 }

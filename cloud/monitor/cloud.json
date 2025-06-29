@@ -28,6 +28,11 @@
 
     "commandFolderPath": "./command",
 
+    "auth": {
+        "isOpen": true,
+        "defaultDownDeviceAddress": "127.0.0.1"
+    },
+
     "uploadRecord":{
         "uploadRecordInterval": 60000,
         "freeDataBaseRecordInterval": 86400000,

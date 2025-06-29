@@ -1,5 +1,13 @@
-docker build -t cloud-auth-server .
-docker run -d -p 1812:1812 -p 1813:1813 --name cloud-auth-server --net localNet --ip 192.168.0.3 cloud-auth-server
-docker exec -it cloud-auth-server /bin/bash
-
-docker run -d --name cloud-auth-server --network host cloud-auth-server
+base镜像名：cloud-auth-server
+构建命令: docker build -t cloud-auth-server .
+运行命令（靶场环境）：docker run -d -p 1812:1812/udp -p 1813:1813/udp -p 3799:3799/udp --name cloud-auth-server --net localNet --ip 192.168.0.3 cloud-auth-server
+运行命令（三十所环境）：
+开放端口说明：
+    -端口 1 ：1812，1813，3799都为认证所需端口
+    -端口 2 ：
+    ......
+配置项说明：
+    数据库修改位置：config文件夹中的sql文件中
+    后端请求修改位置...
+    卷挂载位置...(如果需要与其他容器共享，需要强调说明)
+其他说明项：

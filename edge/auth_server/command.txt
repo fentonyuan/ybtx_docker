@@ -1,5 +1,14 @@
-docker build -t edge-auth-server .
-docker run -d --name edge-auth-server --network host edge-auth-server
-docker exec -it cloud-auth-server /bin/bash
-
-docker run -d --name edge-auth-server -v /home/pcl/output:/home/output --network host edge-auth-server
+base镜像名：edge-auth-server
+构建命令: docker build -t edge-auth-server .
+运行命令（靶场环境）：docker run -d  -p 1812:1812/udp  -p 1813:1813/udp  -p 3799:3799/udp  --name edge-auth-server -v /home/pcl/output:/home/output --net localNet --ip 192.168.0.4 edge-auth-server
+运行命令（三十所环境）：
+开放端口说明：
+    -端口 1 ：1812，1813，3799都为认证所需端口
+    -端口 2 ：
+    ......
+配置项说明：
+    数据库修改位置：config文件夹中的sql文件中
+    后端请求修改位置...
+    卷挂载位置...(如果需要与其他容器共享，需要强调说明)
+    /home/pcl/output:/home/output 此挂载将与edge-monitor共享目录
+其他说明项：
