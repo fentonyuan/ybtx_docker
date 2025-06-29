@@ -1,8 +1,26 @@
-#加载基础镜像
+base镜像名：gateway-web-backend
+构建命令: 
 docker load -i gateway-web-backend.tar
-
-#Dockerfile中根据基础镜像构建最终可执行镜像
-docker build --pull=false -t gateway-web-backend:latest -f Dockerfile .
-
-#运行镜像语句
+运行命令（靶场环境）：
 docker run -d --name gateway-web-backend --net gatewayNet -p 8080:8080 -v /home/pcl/gateway/monitor/file_buffer:/app/file_buffer gateway-web-backend
+
+运行命令（三十所环境）： {MONITOR_FILE_BUFFER} 需要整体替换为 gateway-monitor文件下file_buffer的实际路径值
+docker run -d --name gateway-web-backend --net gatewayNet -p 8080:8080 -v {MONITOR_FILE_BUFFER}:/app/file_buffer gateway-web-backend
+
+开放端口说明：
+    -端口 1 ：8080为后端运行端口
+    -端口 2 ：
+    ......
+配置项说明：
+    数据库修改位置：
+    后端请求修改位置...
+    卷挂载位置...(如果需要与其他容器共享，需要强调说明) 挂载位置为gateway_monitor下file_buffer位置。此位置为用户上传文件位置
+其他说明项：
+    #构建顺序 需要按照顺序构建
+    gateway-database
+    gateway-web-backed
+    gateway-web-fronted
+    gateway-auth-server
+
+    #monitor 由于奇安信通道的原因 因此只能采用 java -jar ybtx_monitor.jar & d 方式运行，无法构建镜像
+    gateway-monitor

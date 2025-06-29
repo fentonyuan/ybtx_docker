@@ -1,17 +1,15 @@
-FROM ubuntu:20.04
+FROM gateway-web-frontend:base
+
+# 拷贝资源文件与配置
 COPY config/ /home/
 
 RUN mkdir /home/cloud-frontend \
-    && apt-get update \
-    && apt-get install -y nginx \
-    && apt-get install -y zip \
-    && mv /home/sources.list /etc/apt/sources.list \
-    && mv /home/certs /etc/nginx/
+    && unzip -d /home/cloud-frontend /home/dist.zip \
+    && rm -f /home/dist.zip \
+    && mv /home/nginx.conf /etc/nginx/nginx.conf \
+    && mv /home/static.conf /etc/nginx/conf.d/default.conf \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /home
-RUN unzip -d ./cloud-frontend dist.zip \
-    && rm -f dist.zip \
-    && mv -f ./nginx.conf /etc/nginx \
-    && mv -f ./static.conf /etc/nginx/conf.d
-CMD ["nginx", "-g", "daemon off;"]
 EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

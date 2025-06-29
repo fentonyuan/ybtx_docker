@@ -51,7 +51,7 @@ auth:
   ca-cert: ./auth/ca.pem
   client-cert: ""
   client-key: ""
-  nas-ip-address: 192.168.0.5
+  nas-ip-address: gateway-auth-server
   dictionary-path: ./auth/radius_dictionary
   public-key-path: ./auth/public_key.pem
   auth_port: 1812

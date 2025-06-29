@@ -1,2 +1,8 @@
-docker build -t gateway-web-frontend .
-docker run -d --name gateway-web-frontend -p 5173:80  --net localNet --ip 192.168.0.3 gateway-web-frontend
+#加载基础镜像
+docker load -i gateway-web-frontend.tar
+
+#Dockerfile中根据基础镜像构建最终可执行镜像
+docker build --pull=false -t gateway-web-frontend:latest -f Dockerfile .
+
+#启动镜像语句
+docker run -d --name gateway-web-frontend -p 5173:80 --net gatewayNet gateway-web-frontend

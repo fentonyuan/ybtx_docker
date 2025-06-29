@@ -7,6 +7,5 @@ gateway-web-backed
 gateway-web-fronted
 gateway-auth-server
 
-
 #monitor 由于奇安信通道的原因 因此只能采用 java -jar ybtx_monitor.jar & d 方式运行，无法构建镜像
 gateway-monitor
