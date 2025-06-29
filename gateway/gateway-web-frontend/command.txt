@@ -1,8 +1,28 @@
-#加载基础镜像
+base镜像名：gateway-web-frontend
+加载基础镜像命令: 
 docker load -i gateway-web-frontend.tar
-
-#Dockerfile中根据基础镜像构建最终可执行镜像
+构建最终镜像命令:
 docker build --pull=false -t gateway-web-frontend:latest -f Dockerfile .
 
-#启动镜像语句
+运行命令（靶场环境）：
 docker run -d --name gateway-web-frontend -p 5173:80 --net gatewayNet gateway-web-frontend
+运行命令（三十所环境）：
+docker run -d --name gateway-web-frontend -p 5173:80 --net gatewayNet gateway-web-frontend
+
+开放端口说明：
+    -端口 1 ：5173 此端口为用户访问前端运行端口
+    -端口 2 ：
+    ......
+配置项说明：
+    数据库修改位置：
+    后端请求修改位置...
+    卷挂载位置...(如果需要与其他容器共享，需要强调说明) 
+其他说明项：
+    #构建顺序 需要按照顺序构建
+    gateway-database
+    gateway-web-backed
+    gateway-web-fronted
+    gateway-auth-server
+
+    #monitor 由于奇安信通道的原因 因此只能采用 java -jar ybtx_monitor.jar & d 方式运行，无法构建镜像
+    gateway-monitor
