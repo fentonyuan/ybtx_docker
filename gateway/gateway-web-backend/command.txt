@@ -1,6 +1,8 @@
 base镜像名：gateway-web-backend
-构建命令: 
+加载命令: 
 docker load -i gateway-web-backend.tar
+构建命令:
+docker build --pull=false -t gateway-web-backend:latest -f Dockerfile .
 运行命令（靶场环境）：
 docker run -d --name gateway-web-backend --net gatewayNet -p 8080:8080 -v /home/pcl/gateway/monitor/file_buffer:/app/file_buffer gateway-web-backend
 
@@ -22,5 +24,5 @@ docker run -d --name gateway-web-backend --net gatewayNet -p 8080:8080 -v {MONIT
     gateway-web-fronted
     gateway-auth-server
 
-    #monitor 由于奇安信通道的原因 因此只能采用 java -jar ybtx_monitor.jar & d 方式运行，无法构建镜像
+    #monitor 由于奇安信通道的原因 因此只能采用 java -jar ybtx_monitor.jar &  方式运行，无法构建镜像
     gateway-monitor
